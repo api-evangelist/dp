@@ -1,0 +1,13 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/dp-bohrium-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token
+  sources:
+  - openapi/dp-bohrium-openapi.json
