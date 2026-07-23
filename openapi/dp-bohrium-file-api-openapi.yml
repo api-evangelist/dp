@@ -1,0 +1,461 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 文件盘 (bohrium-file) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 文件盘 (bohrium-file)
+  description: personal/share 盘文件管理 — 列出、上传、下载、移动、复制、删除。v1 用于 personal/share，v2 file 仅用于 appJob。免费。
+paths:
+  /openapi/v1/ak/get:
+    get:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 解析当前身份 (user_id/orgId)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/iterate:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 列目录
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prefix:
+                  type: string
+                projectId:
+                  type: string
+                userId:
+                  type: string
+                dirSpace:
+                  type: string
+                maxObjects:
+                  type: integer
+                nextToken:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/stat/{path}:
+    get:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 文件是否存在/状态
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/meta/{path}:
+    get:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 文件元数据
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/download/{path}:
+    get:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 下载（可能 302，需 -L）
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/mkdir:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 创建目录
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                projectId:
+                  type: string
+                userId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/move:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 移动/重命名
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourcePath:
+                  type: string
+                destinationPath:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/mover:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 移动（递归）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourcePath:
+                  type: string
+                destinationPath:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/copy:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 复制
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourcePath:
+                  type: string
+                destinationPath:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/copyr:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 复制（递归）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourcePath:
+                  type: string
+                destinationPath:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/delete/{path}:
+    delete:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 删除
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/deleter/{path}:
+    delete:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 删除（递归）
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/decompress:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 解压
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filePath:
+                  type: string
+                dirName:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/file/upload/binary:
+    get:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 获取上传凭证（推荐）
+      parameters:
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v1/file/upload/binary:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 直接上传（返回 307，需 -L）
+      description: Body 为二进制文件内容 (--data-binary)。
+      parameters:
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/file/iterate:
+    post:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 列目录（仅 appJob 工作区）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pathType:
+                  type: string
+                pathKey:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/file/download:
+    get:
+      tags:
+      - 文件盘 (bohrium-file)
+      summary: 下载（仅 appJob 工作区）
+      parameters:
+      - name: pathType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pathKey
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

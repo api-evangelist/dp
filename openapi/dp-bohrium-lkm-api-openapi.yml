@@ -1,0 +1,232 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 大知识模型 (bohrium-lkm) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 大知识模型 (bohrium-lkm)
+  description: LKM — 知识节点检索、推理链检索、论文知识图谱、追溯 claim 依据、批量节点水合、提交反馈。收费（定价中，待补充）。
+paths:
+  /openapi/v2/lkm/search:
+    post:
+      tags:
+      - 大知识模型 (bohrium-lkm)
+      summary: 检索 claim/question/abstract
+      description: '**计费**：按调用计费，实际费用以账单为准'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                keywords:
+                  type: array
+                  items:
+                    type: string
+                retrieval_mode:
+                  type: string
+                sort_by:
+                  type: string
+                scopes:
+                  type: array
+                  items:
+                    type: string
+                filters:
+                  type: array
+                  items:
+                    type: string
+                reasoning_only:
+                  type: boolean
+                offset:
+                  type: integer
+                limit:
+                  type: integer
+      x-bohrium-price:
+        billable: true
+        currency: CNY
+        skill: bohrium-lkm
+        note: 按调用计费，实际费用以账单为准
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/lkm/reasoning/search:
+    post:
+      tags:
+      - 大知识模型 (bohrium-lkm)
+      summary: 推理链检索
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                keywords:
+                  type: array
+                  items:
+                    type: string
+                format:
+                  type: string
+                filters:
+                  type: array
+                  items:
+                    type: string
+                offset:
+                  type: integer
+                limit:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/lkm/papers/graph:
+    post:
+      tags:
+      - 大知识模型 (bohrium-lkm)
+      summary: 论文级知识图谱
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package_id:
+                  type: string
+                paper_id:
+                  type: string
+                doi:
+                  type: string
+                title:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/lkm/claims/{id}/reasoning:
+    get:
+      tags:
+      - 大知识模型 (bohrium-lkm)
+      summary: 单 claim 推理链
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: max_chains
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/lkm/variables/batch:
+    post:
+      tags:
+      - 大知识模型 (bohrium-lkm)
+      summary: 批量水合节点
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/lkm/feedback:
+    post:
+      tags:
+      - 大知识模型 (bohrium-lkm)
+      summary: 提交反馈
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: integer
+                content:
+                  type: boolean
+                gcn_id:
+                  type: string
+                paper_metadata_id:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

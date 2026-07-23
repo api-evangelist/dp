@@ -1,0 +1,1337 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 知识库 (bohrium-knowledge-base) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 知识库 (bohrium-knowledge-base)
+  description: 知识库管理 — 知识库/文件夹/文献/标签/笔记/召回/权限。网关转发至 literature-sage。免费（仅容量配额）。
+paths:
+  /openapi/v2/knowledge/knowledge_base/create:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 创建知识库
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                knowledgeBaseName:
+                  type: string
+                cover:
+                  type: string
+                introduction:
+                  type: string
+                privilege:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/list:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 我的知识库列表
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: pageNum
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: orderBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/update:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 更新知识库
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/{node_id}:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 知识库详情
+      parameters:
+      - name: node_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/discover:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 发现公开知识库
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/recommendation:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 推荐知识库
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/favorite:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 收藏知识库
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 我的收藏
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/unfavorite:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 取消收藏
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/browse/add:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 记录浏览
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/browse/query:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 浏览历史
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/history/query:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 搜索历史
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/knowledge_base/search/name:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 按名称搜索知识库
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keyword:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/root:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 根目录（知识库列表）
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/children:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 子目录
+      parameters:
+      - name: folderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageNum
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/directory:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 目录树
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/file_tree:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 含文献的文件树
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/create:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 创建文件夹
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                parentId:
+                  type: string
+                folderName:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/update:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 重命名文件夹
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+                folderName:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/move:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 移动文件夹
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourceFolderId:
+                  type: string
+                targetFolderId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/folder/delete:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 删除文件夹/知识库
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 文献列表
+      parameters:
+      - name: parentId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageNum
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: noTag
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/detail:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 文献详情
+      parameters:
+      - name: resourceId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/read:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 获取下载链接
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userResourceId:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/multipart:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 获取上传凭证
+      parameters:
+      - name: fileName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: md5
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parentId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/submit:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 登记已上传文件
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                parentId:
+                  type: string
+                fileName:
+                  type: string
+                md5:
+                  type: string
+                size:
+                  type: integer
+                url:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/edit:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 编辑文献元数据
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                doi:
+                  type: string
+                authors:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/delete_literature:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 删除文献
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userResourceId:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/update_literature:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 重命名文献
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userResourceId:
+                  type: array
+                  items:
+                    type: string
+                fileName:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/move:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 移动文献
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fileNodesIdList:
+                  type: array
+                  items:
+                    type: string
+                folderNodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/search:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 内容搜索
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                queryContent:
+                  type: string
+                nodesId:
+                  type: string
+                knowledgeBaseId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/fileinfo:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 按 userResourceId/enclosureId 取元信息
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userResourceId:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/ids:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 文件夹下全部文献 ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                parentId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/tagInfo:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 单文件标签信息
+      parameters:
+      - name: resourceId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/upload/record:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 上传记录
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/capacity:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 容量使用
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/tag:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 给文件打标签
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagId:
+                  type: string
+                resourceId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 标签统计
+      parameters:
+      - name: parentId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rootFolderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/file/untag:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 取消标签
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagId:
+                  type: string
+                resourceId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/tag:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 标签列表
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 创建标签
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    put:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 编辑标签
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagId:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    delete:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 删除标签
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/note:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 获取笔记
+      parameters:
+      - name: resourceId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 创建/更新笔记
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resourceId:
+                  type: string
+                note:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/box/search_by_md5_paper_id:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 单篇文献切片
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                md5:
+                  type: string
+                paper_id:
+                  type: string
+                page_num:
+                  type: integer
+                page_size:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/recall/papers:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 指定文献内召回
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                papers:
+                  type: array
+                  items:
+                    type: string
+                text:
+                  type: string
+                k:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/recall/hybrid:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 知识库混合召回
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                knowledge_base_id:
+                  type: string
+                text:
+                  type: string
+                k:
+                  type: integer
+                keywords:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/acl:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 权限列表
+      parameters:
+      - name: nodesId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/share_status:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 设置分享状态
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+                privilege:
+                  type: integer
+                shareMode:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/user_role:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 更新用户角色
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+                userId:
+                  type: string
+                role:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    delete:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 移除用户角色
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+                userId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/batch_add_readers:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 批量添加读者
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/join_request:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 申请加入
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 查询加入申请
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    put:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 审批加入申请
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/user_knowledge_base_role:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 查询用户角色
+      parameters:
+      - name: nodesId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/knowledge_base/join/tree:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 已加入知识库（树）
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/knowledge_base/join/detail:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 加入详情
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/knowledge_base/exit:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 退出知识库
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodesId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/user_pending_join_req:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 待处理加入申请
+      parameters:
+      - name: nodesId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/join_request/personal:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 我提交的加入申请
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/join_request/manageable:
+    get:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 可审批的加入申请
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/knowledge/account/feishu_bot/send_message:
+    post:
+      tags:
+      - 知识库 (bohrium-knowledge-base)
+      summary: 飞书机器人消息
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: integer
+                msg:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

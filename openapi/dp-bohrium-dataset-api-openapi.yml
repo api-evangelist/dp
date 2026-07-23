@@ -1,0 +1,294 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 数据集 (bohrium-dataset) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 数据集 (bohrium-dataset)
+  description: 数据集管理 — 创建、上传、下载、版本控制。免费。
+paths:
+  /openapi/v2/ds/{id}:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 数据集详情
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    put:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 更新数据集信息
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/{id}/version:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 版本列表
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    post:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 创建新版本
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                versionDesc:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/{id}/version/{version_id}:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 版本详情
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    delete:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 删除版本
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/:
+    post:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 创建数据集（结尾斜杠必需）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                projectId:
+                  type: string
+                identifier:
+                  type: string
+              required:
+              - title
+              - projectId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/commit:
+    put:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 上传后提交
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                datasetId:
+                  type: string
+              required:
+              - datasetId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/quota/check:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 配额检查
+      parameters:
+      - name: projectId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/input/token:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 获取上传 token
+      parameters:
+      - name: projectId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/{id}/permission:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 数据集权限
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/ds/project:
+    get:
+      tags:
+      - 数据集 (bohrium-dataset)
+      summary: 关联项目
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

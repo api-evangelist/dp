@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 网页搜索 (bohrium-web-search) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 网页搜索 (bohrium-web-search)
+  description: 网页搜索 — 代理 searchapi.io 做开放互联网检索。免费。
+paths:
+  /openapi/v2/search/web:
+    get:
+      tags:
+      - 网页搜索 (bohrium-web-search)
+      summary: 开放网页搜索
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: num
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

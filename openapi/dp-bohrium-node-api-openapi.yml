@@ -1,0 +1,215 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 开发节点 (bohrium-node) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 开发节点 (bohrium-node)
+  description: 开发节点管理 — 创建、启停、删除容器/虚拟机。运行按机时收费，价格见 Node 定价页。
+paths:
+  /openapi/v2/node/add:
+    post:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 创建节点（非交互）
+      description: '**计费**：按机时收费（元/小时），价格见 Node 定价页'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                name:
+                  type: string
+                imageId:
+                  type: string
+                machineConfig:
+                  type: string
+                diskSize:
+                  type: integer
+      x-bohrium-price:
+        billable: true
+        currency: CNY
+        skill: bohrium-node
+        unit: 小时
+        note: 开机后按机时收费，价格见 Node 定价页
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/resources:
+    get:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 可用机型资源
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/resources/price:
+    get:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 资源价格（元/小时）
+      parameters:
+      - name: skuId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/{machine_id}:
+    get:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 节点详情（含 SSH 密码）
+      parameters:
+      - name: machine_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/restart/{machine_id}:
+    post:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 重启节点
+      parameters:
+      - name: machine_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/modify/{machine_id}:
+    post:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 重命名节点
+      parameters:
+      - name: machine_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/ds:
+    get:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 查看绑定的数据集
+      parameters:
+      - name: nodeId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/node/ds/bind:
+    post:
+      tags:
+      - 开发节点 (bohrium-node)
+      summary: 绑定数据集
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodeId:
+                  type: string
+                datasetId:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

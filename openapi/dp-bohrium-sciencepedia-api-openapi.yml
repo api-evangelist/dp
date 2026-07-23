@@ -1,0 +1,323 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 科学百科 (bohrium-sciencepedia) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: 科学百科 (bohrium-sciencepedia)
+  description: 科学百科 — 搜词条/关键词、浏览领域课程、看章节知识点、查主题知识图谱。免费（限时）。阅读链接指向 www.bohrium.com。
+paths:
+  /openapi/v2/literature-sage/wiki_v2/search/universal:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 统一搜索（词条+关键词+领域）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                language:
+                  type: string
+                style:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/article:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 词条文章全文
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entry_id:
+                  type: string
+                language:
+                  type: string
+                style:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/keyword:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 关键词全文
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keyword_id:
+                  type: string
+                language:
+                  type: string
+                style:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/major_levels:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 学科与层级
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+                style:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/level_fields:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 层级下课程（分页）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                node_ids:
+                  type: array
+                  items:
+                    type: string
+                page_num:
+                  type: integer
+                page_size:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/get_wiki_index:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 课程章节树+词条
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                field_id:
+                  type: string
+                node_id:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/knowledge_graph:
+    get:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 主题知识图谱
+      parameters:
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: style
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: skip_cross_domain
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/knowledge_graph/node:
+    get:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 单节点详情
+      parameters:
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: node_type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/knowledge_graph/relationship:
+    get:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 单关系详情
+      parameters:
+      - name: src_node_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: desc_node_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: relation_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/knowledge_graph/search:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 图内查找节点
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/info:
+    get:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 词条/关键词统计
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/literature-sage/wiki_v2/search_index_name:
+    post:
+      tags:
+      - 科学百科 (bohrium-sciencepedia)
+      summary: 按名称搜索节点
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                node_types:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token

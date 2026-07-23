@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) PDF 解析 (bohrium-pdf-parser) API
+  description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
+
+
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+
+
+    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+
+
+    计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
+
+
+    说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。'
+  version: 2.0.0
+servers:
+- url: https://open.bohrium.com
+  description: Bohrium OpenAPI 正式环境
+security:
+- bearerAuth: []
+tags:
+- name: PDF 解析 (bohrium-pdf-parser)
+  description: Uni-Parser — 提取文本、表格、图表、公式。收费：0.05 元/页（触发时扣）。figure 模块无权限时可能 403。
+paths:
+  /openapi/v2/parse/trigger-url-async:
+    post:
+      tags:
+      - PDF 解析 (bohrium-pdf-parser)
+      summary: 按 URL 提交解析
+      description: '**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                sync:
+                  type: boolean
+                textual:
+                  type: boolean
+                table:
+                  type: boolean
+                chart:
+                  type: boolean
+                figure:
+                  type: boolean
+                expression:
+                  type: boolean
+                equation:
+                  type: boolean
+                molecule:
+                  type: boolean
+                pages:
+                  type: string
+                timeout:
+                  type: integer
+      x-bohrium-price:
+        billable: true
+        currency: CNY
+        skill: bohrium-pdf-parser
+        items:
+        - amount: 0.05
+          unit: 页
+        note: 触发解析时扣，查询结果免费
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/parse/trigger-file-async:
+    post:
+      tags:
+      - PDF 解析 (bohrium-pdf-parser)
+      summary: 按文件上传提交解析（multipart）
+      description: '**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                token:
+                  type: string
+                sync:
+                  type: boolean
+                textual:
+                  type: boolean
+                table:
+                  type: boolean
+                chart:
+                  type: boolean
+                figure:
+                  type: boolean
+                expression:
+                  type: boolean
+                equation:
+                  type: boolean
+                molecule:
+                  type: boolean
+                pages:
+                  type: string
+                timeout:
+                  type: integer
+              required:
+              - token
+      x-bohrium-price:
+        billable: true
+        currency: CNY
+        skill: bohrium-pdf-parser
+        items:
+        - amount: 0.05
+          unit: 页
+        note: 触发解析时扣，查询结果免费
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /openapi/v2/parse/get-result:
+    post:
+      tags:
+      - PDF 解析 (bohrium-pdf-parser)
+      summary: 轮询/获取解析结果（返回 cost）
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                content:
+                  type: boolean
+                objects:
+                  type: boolean
+                pages_dict:
+                  type: string
+              required:
+              - token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 0 成功，2000 未授权
+        message:
+          type: string
+        data:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token
