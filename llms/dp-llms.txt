@@ -1,0 +1,30 @@
+# DP Technology (Bohrium)
+
+> DP Technology (Deep Potential Technology, 深势科技) is a pioneer of "AI for Science," founded in 2018. Its Bohrium platform is a research cloud for microscale scientific computing and industrial design — compute jobs, datasets, container images, knowledge bases, paper/patent/scholar search, PDF parsing, and a scientific-tools library — all reachable through the Bohrium OpenAPI (Bearer AccessKey auth).
+
+## APIs
+
+- [Bohrium OpenAPI 2.0.0](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/openapi/dp-bohrium-openapi.json): 166 operations across 15 services (job, node, dataset, file, image, project, knowledge-base, lkm, paper-search, pdf-parser, scholar-search, sciencepedia, tools, web-search, mentor). Base URL https://open.bohrium.com, Authorization: Bearer BOHR_ACCESS_KEY.
+
+## Specs & Artifacts
+
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/authentication/dp-authentication.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/conventions/dp-conventions.yml)
+- [Error codes](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/errors/dp-error-codes.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/lifecycle/dp-lifecycle.yml)
+- [Agent Skills index](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/skills/_index.yml)
+- [MCP candidate tools](https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/mcp/dp-mcp.yml)
+
+## Packages
+
+- bohrium-sdk (PyPI) — official Bohrium OpenAPI Python SDK
+- bohr-agent-sdk (PyPI) — Bohrium Scientific Agent Development Kit
+- bohrium-skills-cli (npm) — installs the official Bohrium Agent Skills
+
+## Docs
+
+- [DP Technology](https://www.dp.tech/en/product/bohrium)
+- [Bohrium platform](https://bohrium.dp.tech/)
+- [Bohrium Docs](https://bohrium-doc.dp.tech/en/docs/)
+- [Bohrium CLI (bohr)](https://bohrium-doc.dp.tech/en/docs/bohrctl/about/)
+- [Bohrium Agent Skills](https://github.com/dptech-corp/bohrium-skills)

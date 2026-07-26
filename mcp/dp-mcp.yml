@@ -1,0 +1,678 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/dp-bohrium-openapi.json
+note: No official hosted MCP server was found. DP Technology ships an Agent Skills plugin (dptech-corp/bohrium-skills)
+  for Claude Code rather than an MCP server. These candidate tools are derived one-per-operation from
+  the Bohrium OpenAPI 2.0.0 and are a starting point for an MCP wrapper.
+server:
+  name: bohrium
+  transport: http
+  base_url: https://open.bohrium.com
+  auth: Bearer BOHR_ACCESS_KEY
+tool_count: 166
+tools:
+- name: get_ds
+  description: 数据集详情
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/{id}
+- name: update_ds
+  description: 更新数据集信息
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#PUT /openapi/v2/ds/{id}
+- name: get_ds_version
+  description: 版本列表
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/{id}/version
+- name: create_ds_version
+  description: 创建新版本
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/ds/{id}/version
+- name: get_ds_version_1
+  description: 版本详情
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/{id}/version/{version_id}
+- name: delete_ds_version
+  description: 删除版本
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#DELETE /openapi/v2/ds/{id}/version/{version_id}
+- name: create_ds
+  description: 创建数据集（结尾斜杠必需）
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/ds/
+- name: update_ds_commit
+  description: 上传后提交
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#PUT /openapi/v2/ds/commit
+- name: get_ds_quota_check
+  description: 配额检查
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/quota/check
+- name: get_ds_input_token
+  description: 获取上传 token
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/input/token
+- name: get_ds_permission
+  description: 数据集权限
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/{id}/permission
+- name: get_ds_project
+  description: 关联项目
+  group: bohrium-dataset
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/ds/project
+- name: get_ak_get
+  description: 解析当前身份 (user_id/orgId)
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/ak/get
+- name: create_file_iterate
+  description: 列目录
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/iterate
+- name: get_file_stat
+  description: 文件是否存在/状态
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/file/stat/{path}
+- name: get_file_meta
+  description: 文件元数据
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/file/meta/{path}
+- name: get_file_download
+  description: 下载（可能 302，需 -L）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/file/download/{path}
+- name: create_file_mkdir
+  description: 创建目录
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/mkdir
+- name: create_file_move
+  description: 移动/重命名
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/move
+- name: create_file_mover
+  description: 移动（递归）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/mover
+- name: create_file_copy
+  description: 复制
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/copy
+- name: create_file_copyr
+  description: 复制（递归）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/copyr
+- name: delete_file_delete
+  description: 删除
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#DELETE /openapi/v1/file/delete/{path}
+- name: delete_file_deleter
+  description: 删除（递归）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#DELETE /openapi/v1/file/deleter/{path}
+- name: create_file_decompress
+  description: 解压
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/decompress
+- name: get_file_upload_binary
+  description: 获取上传凭证（推荐）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/file/upload/binary
+- name: create_file_upload_binary
+  description: 直接上传（返回 307，需 -L）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/file/upload/binary
+- name: create_file_iterate_1
+  description: 列目录（仅 appJob 工作区）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/file/iterate
+- name: get_file_download_1
+  description: 下载（仅 appJob 工作区）
+  group: bohrium-file
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/file/download
+- name: get_job_list
+  description: 任务列表
+  group: bohrium-job
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/job/list
+- name: get_job_view_conf
+  description: 任务配置（含文件 token）
+  group: bohrium-job
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/job/view/conf/{job_id}
+- name: get_job_snapshot
+  description: 任务快照
+  group: bohrium-job
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v1/job/{job_id}/snapshot
+- name: create_job_modify
+  description: 重命名任务
+  group: bohrium-job
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/job/{job_id}/modify
+- name: create_job_group_modify
+  description: 重命名任务组
+  group: bohrium-job
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v1/job_group/{job_group_id}/modify
+- name: create_knowledge_knowledge_base_create
+  description: 创建知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/create
+- name: get_knowledge_knowledge_base_list
+  description: 我的知识库列表
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/knowledge_base/list
+- name: create_knowledge_knowledge_base_update
+  description: 更新知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/update
+- name: get_knowledge_knowledge_base
+  description: 知识库详情
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/knowledge_base/{node_id}
+- name: get_knowledge_knowledge_base_discover
+  description: 发现公开知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/knowledge_base/discover
+- name: get_knowledge_knowledge_base_recommendation
+  description: 推荐知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/knowledge_base/recommendation
+- name: create_knowledge_knowledge_base_favorite
+  description: 收藏知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/favorite
+- name: get_knowledge_knowledge_base_favorite
+  description: 我的收藏
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/knowledge_base/favorite
+- name: create_knowledge_knowledge_base_unfavorite
+  description: 取消收藏
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/unfavorite
+- name: create_knowledge_knowledge_base_browse_add
+  description: 记录浏览
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/browse/add
+- name: create_knowledge_knowledge_base_browse_query
+  description: 浏览历史
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/browse/query
+- name: create_knowledge_knowledge_base_history_query
+  description: 搜索历史
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/history/query
+- name: create_knowledge_knowledge_base_search_name
+  description: 按名称搜索知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/knowledge_base/search/name
+- name: get_knowledge_folder_root
+  description: 根目录（知识库列表）
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/folder/root
+- name: get_knowledge_folder_children
+  description: 子目录
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/folder/children
+- name: get_knowledge_folder_directory
+  description: 目录树
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/folder/directory
+- name: get_knowledge_folder_file_tree
+  description: 含文献的文件树
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/folder/file_tree
+- name: create_knowledge_folder_create
+  description: 创建文件夹
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/folder/create
+- name: create_knowledge_folder_update
+  description: 重命名文件夹
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/folder/update
+- name: create_knowledge_folder_move
+  description: 移动文件夹
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/folder/move
+- name: create_knowledge_folder_delete
+  description: 删除文件夹/知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/folder/delete
+- name: get_knowledge_file
+  description: 文献列表
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file
+- name: get_knowledge_file_detail
+  description: 文献详情
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file/detail
+- name: create_knowledge_file_read
+  description: 获取下载链接
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/read
+- name: get_knowledge_file_multipart
+  description: 获取上传凭证
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file/multipart
+- name: create_knowledge_file_submit
+  description: 登记已上传文件
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/submit
+- name: create_knowledge_file_edit
+  description: 编辑文献元数据
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/edit
+- name: create_knowledge_file_delete_literature
+  description: 删除文献
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/delete_literature
+- name: create_knowledge_file_update_literature
+  description: 重命名文献
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/update_literature
+- name: create_knowledge_file_move
+  description: 移动文献
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/move
+- name: create_knowledge_file_search
+  description: 内容搜索
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/search
+- name: create_knowledge_file_fileinfo
+  description: 按 userResourceId/enclosureId 取元信息
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/fileinfo
+- name: create_knowledge_file_ids
+  description: 文件夹下全部文献 ID
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/ids
+- name: get_knowledge_file_tagInfo
+  description: 单文件标签信息
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file/tagInfo
+- name: get_knowledge_file_upload_record
+  description: 上传记录
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file/upload/record
+- name: get_knowledge_file_capacity
+  description: 容量使用
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file/capacity
+- name: create_knowledge_file_tag
+  description: 给文件打标签
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/tag
+- name: get_knowledge_file_tag
+  description: 标签统计
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/file/tag
+- name: create_knowledge_file_untag
+  description: 取消标签
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/file/untag
+- name: get_knowledge_tag
+  description: 标签列表
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/tag
+- name: create_knowledge_tag
+  description: 创建标签
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/tag
+- name: update_knowledge_tag
+  description: 编辑标签
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#PUT /openapi/v2/knowledge/tag
+- name: delete_knowledge_tag
+  description: 删除标签
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#DELETE /openapi/v2/knowledge/tag
+- name: get_knowledge_note
+  description: 获取笔记
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/note
+- name: create_knowledge_note
+  description: 创建/更新笔记
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/note
+- name: create_knowledge_box_search_by_md5_paper_id
+  description: 单篇文献切片
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/box/search_by_md5_paper_id
+- name: create_knowledge_recall_papers
+  description: 指定文献内召回
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/recall/papers
+- name: create_knowledge_recall_hybrid
+  description: 知识库混合召回
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/recall/hybrid
+- name: get_knowledge_account_acl
+  description: 权限列表
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/acl
+- name: create_knowledge_account_share_status
+  description: 设置分享状态
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/share_status
+- name: create_knowledge_account_user_role
+  description: 更新用户角色
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/user_role
+- name: delete_knowledge_account_user_role
+  description: 移除用户角色
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#DELETE /openapi/v2/knowledge/account/user_role
+- name: create_knowledge_account_batch_add_readers
+  description: 批量添加读者
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/batch_add_readers
+- name: create_knowledge_account_join_request
+  description: 申请加入
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/join_request
+- name: get_knowledge_account_join_request
+  description: 查询加入申请
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/join_request
+- name: update_knowledge_account_join_request
+  description: 审批加入申请
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#PUT /openapi/v2/knowledge/account/join_request
+- name: get_knowledge_account_user_knowledge_base_role
+  description: 查询用户角色
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/user_knowledge_base_role
+- name: get_knowledge_account_knowledge_base_join_tree
+  description: 已加入知识库（树）
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/knowledge_base/join/tree
+- name: create_knowledge_account_knowledge_base_join_detail
+  description: 加入详情
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/knowledge_base/join/detail
+- name: create_knowledge_account_knowledge_base_exit
+  description: 退出知识库
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/knowledge_base/exit
+- name: get_knowledge_account_user_pending_join_req
+  description: 待处理加入申请
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/user_pending_join_req
+- name: get_knowledge_account_join_request_personal
+  description: 我提交的加入申请
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/join_request/personal
+- name: get_knowledge_account_join_request_manageable
+  description: 可审批的加入申请
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/knowledge/account/join_request/manageable
+- name: create_knowledge_account_feishu_bot_send_message
+  description: 飞书机器人消息
+  group: bohrium-knowledge-base
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/knowledge/account/feishu_bot/send_message
+- name: create_lkm_search
+  description: 检索 claim/question/abstract
+  group: bohrium-lkm
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/lkm/search
+- name: create_lkm_reasoning_search
+  description: 推理链检索
+  group: bohrium-lkm
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/lkm/reasoning/search
+- name: create_lkm_papers_graph
+  description: 论文级知识图谱
+  group: bohrium-lkm
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/lkm/papers/graph
+- name: get_lkm_claims_reasoning
+  description: 单 claim 推理链
+  group: bohrium-lkm
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/lkm/claims/{id}/reasoning
+- name: create_lkm_variables_batch
+  description: 批量水合节点
+  group: bohrium-lkm
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/lkm/variables/batch
+- name: create_lkm_feedback
+  description: 提交反馈
+  group: bohrium-lkm
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/lkm/feedback
+- name: create_sigma_search_ai_search_sessions
+  description: 创建会话，返回 sessionId
+  group: bohrium-mentor
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/sigma-search/api/v4/ai_search/sessions
+- name: get_sigma_search_sse_ai_search_stream
+  description: 订阅 SSE 流
+  group: bohrium-mentor
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/sigma-search/api/v3/sse/ai_search/v1/{sessionId}/stream
+- name: get_sigma_search_ai_search_sessions
+  description: 会话元数据
+  group: bohrium-mentor
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/sigma-search/api/v4/ai_search/sessions/{sessionId}
+- name: get_sigma_search_history
+  description: 会话历史（断线恢复）
+  group: bohrium-mentor
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/sigma-search/api/v4/{sessionId}/history
+- name: create_node_add
+  description: 创建节点（非交互）
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/node/add
+- name: get_node_resources
+  description: 可用机型资源
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/node/resources
+- name: get_node_resources_price
+  description: 资源价格（元/小时）
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/node/resources/price
+- name: get_node
+  description: 节点详情（含 SSH 密码）
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/node/{machine_id}
+- name: create_node_restart
+  description: 重启节点
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/node/restart/{machine_id}
+- name: create_node_modify
+  description: 重命名节点
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/node/modify/{machine_id}
+- name: get_node_ds
+  description: 查看绑定的数据集
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/node/ds
+- name: create_node_ds_bind
+  description: 绑定数据集
+  group: bohrium-node
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/node/ds/bind
+- name: create_paper_rag_pass_keyword
+  description: 英文文献 RAG 搜索
+  group: bohrium-paper-search
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/paper/rag/pass/keyword
+- name: create_paper_rag_pass_patent
+  description: 专利 RAG 搜索
+  group: bohrium-paper-search
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/paper/rag/pass/patent
+- name: create_parse_trigger_url_async
+  description: 按 URL 提交解析
+  group: bohrium-pdf-parser
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/parse/trigger-url-async
+- name: create_parse_trigger_file_async
+  description: 按文件上传提交解析（multipart）
+  group: bohrium-pdf-parser
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/parse/trigger-file-async
+- name: create_parse_get_result
+  description: 轮询/获取解析结果（返回 cost）
+  group: bohrium-pdf-parser
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/parse/get-result
+- name: get_project_list
+  description: 详细项目列表
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/project/list
+- name: get_project_lite_list
+  description: 精简列表（id+name）
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/project/lite_list
+- name: create_project_set_name
+  description: 重命名项目
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/project/set_name
+- name: create_project_set_cost_limit
+  description: 设置成本上限
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/project/set_cost_limit
+- name: get_project_users
+  description: 项目成员
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/project/{id}/users
+- name: create_project_add_user
+  description: 添加成员
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/project/add_user
+- name: create_project_del_user
+  description: 移除成员
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/project/del_user
+- name: create_project_manager_add
+  description: 添加管理员
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/project/manager/add
+- name: create_project_manager_del
+  description: 移除管理员
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/project/manager/del
+- name: update_project_recovery_user
+  description: 恢复被移除成员
+  group: bohrium-project
+  source_operation: openapi/dp-bohrium-openapi.json#PUT /openapi/v2/project/{id}/recovery_user
+- name: get_image_public_version_search
+  description: 搜索公开镜像版本
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/image/public/version/search
+- name: get_image_public
+  description: 公开镜像分类
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/image/public
+- name: get_image_public_version
+  description: 公开镜像版本
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/image/public/{image_id}/version
+- name: create_image_private
+  description: 创建私有镜像（Dockerfile 构建）
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/image/private
+- name: get_image_private
+  description: 私有镜像列表
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/image/private
+- name: get_image_private_1
+  description: 私有镜像详情
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/image/private/{image_id}
+- name: update_image_private
+  description: 更新镜像描述
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#PUT /openapi/v2/image/private/{image_id}
+- name: create_image_dockerfile_check
+  description: 校验 Dockerfile
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/image/dockerfile/check
+- name: get_image_last_used
+  description: 最近使用镜像
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/image/last_used
+- name: create_image_share
+  description: 分享镜像
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/image/{image_id}/share
+- name: delete_image_share
+  description: 取消分享
+  group: bohrium-image
+  source_operation: openapi/dp-bohrium-openapi.json#DELETE /openapi/v2/image/{image_id}/share
+- name: create_paper_server_scholar_search
+  description: 搜索学者
+  group: bohrium-scholar-search
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/paper-server/scholar/search
+- name: get_paper_server_scholar_info
+  description: 学者完整画像
+  group: bohrium-scholar-search
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/paper-server/scholar/info
+- name: create_literature_sage_wiki_search_universal
+  description: 统一搜索（词条+关键词+领域）
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/search/universal
+- name: create_literature_sage_wiki_article
+  description: 词条文章全文
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/article
+- name: create_literature_sage_wiki_keyword
+  description: 关键词全文
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/keyword
+- name: create_literature_sage_wiki_major_levels
+  description: 学科与层级
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/major_levels
+- name: create_literature_sage_wiki_level_fields
+  description: 层级下课程（分页）
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/level_fields
+- name: create_literature_sage_wiki_get_wiki_index
+  description: 课程章节树+词条
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/get_wiki_index
+- name: get_literature_sage_wiki_knowledge_graph
+  description: 主题知识图谱
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/wiki_v2/knowledge_graph
+- name: get_literature_sage_wiki_knowledge_graph_node
+  description: 单节点详情
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/wiki_v2/knowledge_graph/node
+- name: get_literature_sage_wiki_knowledge_graph_relationship
+  description: 单关系详情
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/wiki_v2/knowledge_graph/relationship
+- name: create_literature_sage_wiki_knowledge_graph_search
+  description: 图内查找节点
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/knowledge_graph/search
+- name: get_literature_sage_wiki_info
+  description: 词条/关键词统计
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/wiki_v2/info
+- name: create_literature_sage_wiki_search_index_name
+  description: 按名称搜索节点
+  group: bohrium-sciencepedia
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/wiki_v2/search_index_name
+- name: get_literature_sage_tool_domain
+  description: 工具领域列表
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/tool/domain
+- name: get_literature_sage_tool_domain_summary
+  description: 工具总数
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/tool/domain/summary
+- name: create_literature_sage_tool_subdomain
+  description: 子领域列表（分页）
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/tool/subdomain
+- name: create_literature_sage_tool_subdomain_detail
+  description: 子领域详情
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/tool/subdomain/detail
+- name: create_literature_sage_tool_list
+  description: 子领域下工具
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/tool/list
+- name: get_literature_sage_tool_detail
+  description: 工具详情
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/literature-sage/tool/detail
+- name: create_literature_sage_tool_tags
+  description: 子领域标签
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/tool/tags
+- name: create_literature_sage_tool_search_hybrid
+  description: 混合工具检索
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/tool/search/hybrid
+- name: create_literature_sage_tool_search_subdomain
+  description: 子领域搜索
+  group: bohrium-tools
+  source_operation: openapi/dp-bohrium-openapi.json#POST /openapi/v2/literature-sage/tool/search/subdomain
+- name: get_search_web
+  description: 开放网页搜索
+  group: bohrium-web-search
+  source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/search/web

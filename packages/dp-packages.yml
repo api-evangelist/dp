@@ -1,0 +1,65 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/dptech-corp
+note: >-
+  First-party Bohrium client libraries and CLIs published by DP Technology
+  (GitHub org dptech-corp). The DeepModeling packages (dpdispatcher, dpgen,
+  dpdata, deepmd-kit) are the open-source molecular-simulation toolchain DP
+  Technology founded and maintains under github.com/deepmodeling.
+packages:
+  - language: python
+    registry: pypi
+    name: bohrium-sdk
+    url: https://pypi.org/project/bohrium-sdk/
+    install: pip install bohrium-sdk
+    source: https://github.com/dptech-corp/bohrium-openapi-python-sdk
+    description: Official Bohrium OpenAPI Python SDK (job, sigma-search, uni-parser, knowledge-base, paper).
+    official: true
+  - language: python
+    registry: pypi
+    name: bohr-agent-sdk
+    url: https://pypi.org/project/bohr-agent-sdk/
+    install: pip install bohr-agent-sdk
+    source: https://github.com/dptech-corp/bohr-agent-sdk
+    description: Bohrium Scientific Agent Development Kit for building AI agents on the platform.
+    official: true
+  - language: javascript
+    registry: npm
+    name: bohrium-skills-cli
+    url: https://www.npmjs.com/package/bohrium-skills-cli
+    install: npm install -g bohrium-skills-cli
+    source: https://github.com/dptech-corp/bohrium-skills
+    description: Syncs the official Bohrium Agent Skills into local agent skill directories.
+    official: true
+  - language: python
+    registry: pypi
+    name: dpdispatcher
+    url: https://pypi.org/project/dpdispatcher/
+    install: pip install dpdispatcher
+    source: https://github.com/deepmodeling/dpdispatcher
+    description: Generate HPC/Bohrium job scripts, submit and poll them (DeepModeling).
+    official: true
+  - language: python
+    registry: pypi
+    name: dpgen
+    url: https://pypi.org/project/dpgen/
+    install: pip install dpgen
+    source: https://github.com/deepmodeling/dpgen
+    description: DP-GEN, the Deep Potential generator (DeepModeling).
+    official: true
+  - language: python
+    registry: pypi
+    name: dpdata
+    url: https://pypi.org/project/dpdata/
+    install: pip install dpdata
+    source: https://github.com/deepmodeling/dpdata
+    description: Manipulate data formats for DeePMD-kit, VASP, QE, LAMMPS, etc. (DeepModeling).
+    official: true
+  - language: python
+    registry: pypi
+    name: deepmd-kit
+    url: https://pypi.org/project/deepmd-kit/
+    install: pip install deepmd-kit
+    source: https://github.com/deepmodeling/deepmd-kit
+    description: Deep Potential molecular dynamics package (DeepModeling).
+    official: true

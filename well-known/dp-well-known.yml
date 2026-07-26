@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on the Bohrium/DP Technology hosts.
+  None of the standard discovery documents are published (dp.tech returns 301
+  redirects to the SPA; www.dp.tech and bohrium.dp.tech return 404). Absence is
+  valid, recorded data.
+hosts:
+  - host: https://dp.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 301}
+      - {path: /.well-known/openid-configuration, status: 301}
+      - {path: /.well-known/oauth-authorization-server, status: 301}
+      - {path: /.well-known/api-catalog, status: 301}
+      - {path: /.well-known/ai-plugin.json, status: 301}
+  - host: https://www.dp.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://bohrium.dp.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}

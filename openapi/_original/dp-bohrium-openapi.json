@@ -1,0 +1,6363 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bohrium OpenAPI",
+    "description": "Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。\n\n本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。\n\n鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。\n\n计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。\n\n说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://open.bohrium.com",
+      "description": "Bohrium OpenAPI 正式环境"
+    }
+  ],
+  "tags": [
+    {
+      "name": "数据集 (bohrium-dataset)",
+      "description": "数据集管理 — 创建、上传、下载、版本控制。免费。"
+    },
+    {
+      "name": "文件盘 (bohrium-file)",
+      "description": "personal/share 盘文件管理 — 列出、上传、下载、移动、复制、删除。v1 用于 personal/share，v2 file 仅用于 appJob。免费。"
+    },
+    {
+      "name": "计算任务 (bohrium-job)",
+      "description": "计算任务管理 — 提交、查询、终止、删除任务（提交主要经 bohr CLI）。任务运行按机时收费，价格见 Job 定价页。"
+    },
+    {
+      "name": "知识库 (bohrium-knowledge-base)",
+      "description": "知识库管理 — 知识库/文件夹/文献/标签/笔记/召回/权限。网关转发至 literature-sage。免费（仅容量配额）。"
+    },
+    {
+      "name": "大知识模型 (bohrium-lkm)",
+      "description": "LKM — 知识节点检索、推理链检索、论文知识图谱、追溯 claim 依据、批量节点水合、提交反馈。收费（定价中，待补充）。"
+    },
+    {
+      "name": "AI 科学小导师 (bohrium-mentor)",
+      "description": "基于深度推理的科学问答（sigma-search，SSE 编排）。收费：创建会话 2 元/次。注意内部版本混用（sessions v4 / SSE v3 / history v4）。"
+    },
+    {
+      "name": "开发节点 (bohrium-node)",
+      "description": "开发节点管理 — 创建、启停、删除容器/虚拟机。运行按机时收费，价格见 Node 定价页。"
+    },
+    {
+      "name": "论文与专利搜索 (bohrium-paper-search)",
+      "description": "RAG 引擎关键词+语义检索。收费。响应可能为多行 JSON（流式，解析第一行）。"
+    },
+    {
+      "name": "PDF 解析 (bohrium-pdf-parser)",
+      "description": "Uni-Parser — 提取文本、表格、图表、公式。收费：0.05 元/页（触发时扣）。figure 模块无权限时可能 403。"
+    },
+    {
+      "name": "项目管理 (bohrium-project)",
+      "description": "项目管理 — 创建项目、管理成员、设置额度。免费（管理成本额度，非按调用计费）。"
+    },
+    {
+      "name": "容器镜像 (bohrium-image)",
+      "description": "容器镜像管理 — 查询、拉取、创建、删除镜像。免费。镜像地址位于 registry.dp.tech / registry.bohrium.dp.tech。"
+    },
+    {
+      "name": "学者搜索 (bohrium-scholar-search)",
+      "description": "学者搜索与画像 — 按姓名/机构检索，查看发文/引用/h-index/研究方向。免费。"
+    },
+    {
+      "name": "科学百科 (bohrium-sciencepedia)",
+      "description": "科学百科 — 搜词条/关键词、浏览领域课程、看章节知识点、查主题知识图谱。免费（限时）。阅读链接指向 www.bohrium.com。"
+    },
+    {
+      "name": "科学工具库 (bohrium-tools)",
+      "description": "科学工具库 — 按领域/子领域浏览、混合检索工具、查看详情与分类。免费。语言经 Content-Language 头或 body language 指定。"
+    },
+    {
+      "name": "网页搜索 (bohrium-web-search)",
+      "description": "网页搜索 — 代理 searchapi.io 做开放互联网检索。免费。"
+    }
+  ],
+  "paths": {
+    "/openapi/v2/ds/{id}": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "数据集详情",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "更新数据集信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/{id}/version": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "版本列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "创建新版本",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "versionDesc": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/{id}/version/{version_id}": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "版本详情",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "删除版本",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/": {
+      "post": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "创建数据集（结尾斜杠必需）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "identifier": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "projectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/commit": {
+      "put": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "上传后提交",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "datasetId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "datasetId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/quota/check": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "配额检查",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/input/token": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "获取上传 token",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/{id}/permission": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "数据集权限",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/ds/project": {
+      "get": {
+        "tags": [
+          "数据集 (bohrium-dataset)"
+        ],
+        "summary": "关联项目",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/ak/get": {
+      "get": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "解析当前身份 (user_id/orgId)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/iterate": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "列目录",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "prefix": {
+                    "type": "string"
+                  },
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  },
+                  "dirSpace": {
+                    "type": "string"
+                  },
+                  "maxObjects": {
+                    "type": "integer"
+                  },
+                  "nextToken": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/stat/{path}": {
+      "get": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "文件是否存在/状态",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/meta/{path}": {
+      "get": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "文件元数据",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/download/{path}": {
+      "get": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "下载（可能 302，需 -L）",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/mkdir": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "创建目录",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/move": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "移动/重命名",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourcePath": {
+                    "type": "string"
+                  },
+                  "destinationPath": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/mover": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "移动（递归）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourcePath": {
+                    "type": "string"
+                  },
+                  "destinationPath": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/copy": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "复制",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourcePath": {
+                    "type": "string"
+                  },
+                  "destinationPath": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/copyr": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "复制（递归）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourcePath": {
+                    "type": "string"
+                  },
+                  "destinationPath": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/delete/{path}": {
+      "delete": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "删除",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/deleter/{path}": {
+      "delete": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "删除（递归）",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/decompress": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "解压",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filePath": {
+                    "type": "string"
+                  },
+                  "dirName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/file/upload/binary": {
+      "get": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "获取上传凭证（推荐）",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/file/upload/binary": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "直接上传（返回 307，需 -L）",
+        "description": "Body 为二进制文件内容 (--data-binary)。",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/file/iterate": {
+      "post": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "列目录（仅 appJob 工作区）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pathType": {
+                    "type": "string"
+                  },
+                  "pathKey": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/file/download": {
+      "get": {
+        "tags": [
+          "文件盘 (bohrium-file)"
+        ],
+        "summary": "下载（仅 appJob 工作区）",
+        "parameters": [
+          {
+            "name": "pathType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pathKey",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/job/list": {
+      "get": {
+        "tags": [
+          "计算任务 (bohrium-job)"
+        ],
+        "summary": "任务列表",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/job/view/conf/{job_id}": {
+      "get": {
+        "tags": [
+          "计算任务 (bohrium-job)"
+        ],
+        "summary": "任务配置（含文件 token）",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/job/{job_id}/snapshot": {
+      "get": {
+        "tags": [
+          "计算任务 (bohrium-job)"
+        ],
+        "summary": "任务快照",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/job/{job_id}/modify": {
+      "post": {
+        "tags": [
+          "计算任务 (bohrium-job)"
+        ],
+        "summary": "重命名任务",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v1/job_group/{job_group_id}/modify": {
+      "post": {
+        "tags": [
+          "计算任务 (bohrium-job)"
+        ],
+        "summary": "重命名任务组",
+        "parameters": [
+          {
+            "name": "job_group_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/create": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "创建知识库",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "knowledgeBaseName": {
+                    "type": "string"
+                  },
+                  "cover": {
+                    "type": "string"
+                  },
+                  "introduction": {
+                    "type": "string"
+                  },
+                  "privilege": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/list": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "我的知识库列表",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/update": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "更新知识库",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "NodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/{node_id}": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "知识库详情",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/discover": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "发现公开知识库",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/recommendation": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "推荐知识库",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/favorite": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "收藏知识库",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "我的收藏",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/unfavorite": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "取消收藏",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/browse/add": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "记录浏览",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/browse/query": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "浏览历史",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/history/query": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "搜索历史",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/knowledge_base/search/name": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "按名称搜索知识库",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keyword": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/root": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "根目录（知识库列表）",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/children": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "子目录",
+        "parameters": [
+          {
+            "name": "folderId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/directory": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "目录树",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/file_tree": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "含文献的文件树",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/create": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "创建文件夹",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parentId": {
+                    "type": "string"
+                  },
+                  "folderName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/update": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "重命名文件夹",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  },
+                  "folderName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/move": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "移动文件夹",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourceFolderId": {
+                    "type": "string"
+                  },
+                  "targetFolderId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/folder/delete": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "删除文件夹/知识库",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "文献列表",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noTag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/detail": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "文献详情",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/read": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "获取下载链接",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userResourceId": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/multipart": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "获取上传凭证",
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "md5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/submit": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "登记已上传文件",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parentId": {
+                    "type": "string"
+                  },
+                  "fileName": {
+                    "type": "string"
+                  },
+                  "md5": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/edit": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "编辑文献元数据",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "doi": {
+                    "type": "string"
+                  },
+                  "authors": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/delete_literature": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "删除文献",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userResourceId": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/update_literature": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "重命名文献",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userResourceId": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "fileName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/move": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "移动文献",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileNodesIdList": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "folderNodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/search": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "内容搜索",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "queryContent": {
+                    "type": "string"
+                  },
+                  "nodesId": {
+                    "type": "string"
+                  },
+                  "knowledgeBaseId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/fileinfo": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "按 userResourceId/enclosureId 取元信息",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userResourceId": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/ids": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "文件夹下全部文献 ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parentId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/tagInfo": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "单文件标签信息",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/upload/record": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "上传记录",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/capacity": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "容量使用",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/tag": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "给文件打标签",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tagId": {
+                    "type": "string"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "标签统计",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rootFolderId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/file/untag": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "取消标签",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tagId": {
+                    "type": "string"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/tag": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "标签列表",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "创建标签",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "编辑标签",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tagId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "删除标签",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tagId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/note": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "获取笔记",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "创建/更新笔记",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "resourceId": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/box/search_by_md5_paper_id": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "单篇文献切片",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "md5": {
+                    "type": "string"
+                  },
+                  "paper_id": {
+                    "type": "string"
+                  },
+                  "page_num": {
+                    "type": "integer"
+                  },
+                  "page_size": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/recall/papers": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "指定文献内召回",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "papers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "k": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/recall/hybrid": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "知识库混合召回",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "knowledge_base_id": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "k": {
+                    "type": "integer"
+                  },
+                  "keywords": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/acl": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "权限列表",
+        "parameters": [
+          {
+            "name": "nodesId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/share_status": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "设置分享状态",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  },
+                  "privilege": {
+                    "type": "integer"
+                  },
+                  "shareMode": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/user_role": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "更新用户角色",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "移除用户角色",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/batch_add_readers": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "批量添加读者",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/join_request": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "申请加入",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "查询加入申请",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "审批加入申请",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/user_knowledge_base_role": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "查询用户角色",
+        "parameters": [
+          {
+            "name": "nodesId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/knowledge_base/join/tree": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "已加入知识库（树）",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/knowledge_base/join/detail": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "加入详情",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/knowledge_base/exit": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "退出知识库",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodesId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/user_pending_join_req": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "待处理加入申请",
+        "parameters": [
+          {
+            "name": "nodesId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/join_request/personal": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "我提交的加入申请",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/join_request/manageable": {
+      "get": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "可审批的加入申请",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/knowledge/account/feishu_bot/send_message": {
+      "post": {
+        "tags": [
+          "知识库 (bohrium-knowledge-base)"
+        ],
+        "summary": "飞书机器人消息",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "integer"
+                  },
+                  "msg": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/lkm/search": {
+      "post": {
+        "tags": [
+          "大知识模型 (bohrium-lkm)"
+        ],
+        "summary": "检索 claim/question/abstract",
+        "description": "**计费**：按调用计费，实际费用以账单为准",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "keywords": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "retrieval_mode": {
+                    "type": "string"
+                  },
+                  "sort_by": {
+                    "type": "string"
+                  },
+                  "scopes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "reasoning_only": {
+                    "type": "boolean"
+                  },
+                  "offset": {
+                    "type": "integer"
+                  },
+                  "limit": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-lkm",
+          "note": "按调用计费，实际费用以账单为准"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/lkm/reasoning/search": {
+      "post": {
+        "tags": [
+          "大知识模型 (bohrium-lkm)"
+        ],
+        "summary": "推理链检索",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "keywords": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "format": {
+                    "type": "string"
+                  },
+                  "filters": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "offset": {
+                    "type": "integer"
+                  },
+                  "limit": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/lkm/papers/graph": {
+      "post": {
+        "tags": [
+          "大知识模型 (bohrium-lkm)"
+        ],
+        "summary": "论文级知识图谱",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package_id": {
+                    "type": "string"
+                  },
+                  "paper_id": {
+                    "type": "string"
+                  },
+                  "doi": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/lkm/claims/{id}/reasoning": {
+      "get": {
+        "tags": [
+          "大知识模型 (bohrium-lkm)"
+        ],
+        "summary": "单 claim 推理链",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "max_chains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/lkm/variables/batch": {
+      "post": {
+        "tags": [
+          "大知识模型 (bohrium-lkm)"
+        ],
+        "summary": "批量水合节点",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/lkm/feedback": {
+      "post": {
+        "tags": [
+          "大知识模型 (bohrium-lkm)"
+        ],
+        "summary": "提交反馈",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "integer"
+                  },
+                  "content": {
+                    "type": "boolean"
+                  },
+                  "gcn_id": {
+                    "type": "string"
+                  },
+                  "paper_metadata_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/sigma-search/api/v4/ai_search/sessions": {
+      "post": {
+        "tags": [
+          "AI 科学小导师 (bohrium-mentor)"
+        ],
+        "summary": "创建会话，返回 sessionId",
+        "description": "**计费**：2 元/次 或 200 光子/次（创建会话时收取）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "discipline": {
+                    "type": "string"
+                  },
+                  "scene": {
+                    "type": "string"
+                  },
+                  "journal_type": {
+                    "type": "string"
+                  },
+                  "snp_version": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-mentor",
+          "items": [
+            {
+              "amount": 2,
+              "unit": "次"
+            }
+          ],
+          "note": "2 元/次 或 200 光子/次"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/sigma-search/api/v3/sse/ai_search/v1/{sessionId}/stream": {
+      "get": {
+        "tags": [
+          "AI 科学小导师 (bohrium-mentor)"
+        ],
+        "summary": "订阅 SSE 流",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/sigma-search/api/v4/ai_search/sessions/{sessionId}": {
+      "get": {
+        "tags": [
+          "AI 科学小导师 (bohrium-mentor)"
+        ],
+        "summary": "会话元数据",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/sigma-search/api/v4/{sessionId}/history": {
+      "get": {
+        "tags": [
+          "AI 科学小导师 (bohrium-mentor)"
+        ],
+        "summary": "会话历史（断线恢复）",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/add": {
+      "post": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "创建节点（非交互）",
+        "description": "**计费**：按机时收费（元/小时），价格见 Node 定价页",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "imageId": {
+                    "type": "string"
+                  },
+                  "machineConfig": {
+                    "type": "string"
+                  },
+                  "diskSize": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-node",
+          "unit": "小时",
+          "note": "开机后按机时收费，价格见 Node 定价页"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/resources": {
+      "get": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "可用机型资源",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/resources/price": {
+      "get": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "资源价格（元/小时）",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/{machine_id}": {
+      "get": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "节点详情（含 SSH 密码）",
+        "parameters": [
+          {
+            "name": "machine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/restart/{machine_id}": {
+      "post": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "重启节点",
+        "parameters": [
+          {
+            "name": "machine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/modify/{machine_id}": {
+      "post": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "重命名节点",
+        "parameters": [
+          {
+            "name": "machine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/ds": {
+      "get": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "查看绑定的数据集",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/node/ds/bind": {
+      "post": {
+        "tags": [
+          "开发节点 (bohrium-node)"
+        ],
+        "summary": "绑定数据集",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodeId": {
+                    "type": "string"
+                  },
+                  "datasetId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/paper/rag/pass/keyword": {
+      "post": {
+        "tags": [
+          "论文与专利搜索 (bohrium-paper-search)"
+        ],
+        "summary": "英文文献 RAG 搜索",
+        "description": "**计费**：论文搜索 type 0 = 0.05 元/次；type 1 = 0.1 元/次",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "words": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "question": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "integer"
+                  },
+                  "startTime": {
+                    "type": "string"
+                  },
+                  "endTime": {
+                    "type": "string"
+                  },
+                  "jcrZones": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "includeDbs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "areaIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "publicationIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "subjectIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "pageSize": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-paper-search",
+          "items": [
+            {
+              "condition": "type=0",
+              "amount": 0.05,
+              "unit": "次"
+            },
+            {
+              "condition": "type=1",
+              "amount": 0.1,
+              "unit": "次"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/paper/rag/pass/patent": {
+      "post": {
+        "tags": [
+          "论文与专利搜索 (bohrium-paper-search)"
+        ],
+        "summary": "专利 RAG 搜索",
+        "description": "**计费**：专利搜索 type 0 = 0.1 元/次；type 1 = 0.3 元/次；type 2 = 0.5 元/次",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "integer"
+                  },
+                  "words": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "question": {
+                    "type": "string"
+                  },
+                  "pageSize": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-paper-search",
+          "items": [
+            {
+              "condition": "type=0",
+              "amount": 0.1,
+              "unit": "次"
+            },
+            {
+              "condition": "type=1",
+              "amount": 0.3,
+              "unit": "次"
+            },
+            {
+              "condition": "type=2",
+              "amount": 0.5,
+              "unit": "次"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/parse/trigger-url-async": {
+      "post": {
+        "tags": [
+          "PDF 解析 (bohrium-pdf-parser)"
+        ],
+        "summary": "按 URL 提交解析",
+        "description": "**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "sync": {
+                    "type": "boolean"
+                  },
+                  "textual": {
+                    "type": "boolean"
+                  },
+                  "table": {
+                    "type": "boolean"
+                  },
+                  "chart": {
+                    "type": "boolean"
+                  },
+                  "figure": {
+                    "type": "boolean"
+                  },
+                  "expression": {
+                    "type": "boolean"
+                  },
+                  "equation": {
+                    "type": "boolean"
+                  },
+                  "molecule": {
+                    "type": "boolean"
+                  },
+                  "pages": {
+                    "type": "string"
+                  },
+                  "timeout": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-pdf-parser",
+          "items": [
+            {
+              "amount": 0.05,
+              "unit": "页"
+            }
+          ],
+          "note": "触发解析时扣，查询结果免费"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/parse/trigger-file-async": {
+      "post": {
+        "tags": [
+          "PDF 解析 (bohrium-pdf-parser)"
+        ],
+        "summary": "按文件上传提交解析（multipart）",
+        "description": "**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "sync": {
+                    "type": "boolean"
+                  },
+                  "textual": {
+                    "type": "boolean"
+                  },
+                  "table": {
+                    "type": "boolean"
+                  },
+                  "chart": {
+                    "type": "boolean"
+                  },
+                  "figure": {
+                    "type": "boolean"
+                  },
+                  "expression": {
+                    "type": "boolean"
+                  },
+                  "equation": {
+                    "type": "boolean"
+                  },
+                  "molecule": {
+                    "type": "boolean"
+                  },
+                  "pages": {
+                    "type": "string"
+                  },
+                  "timeout": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          }
+        },
+        "x-bohrium-price": {
+          "billable": true,
+          "currency": "CNY",
+          "skill": "bohrium-pdf-parser",
+          "items": [
+            {
+              "amount": 0.05,
+              "unit": "页"
+            }
+          ],
+          "note": "触发解析时扣，查询结果免费"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/parse/get-result": {
+      "post": {
+        "tags": [
+          "PDF 解析 (bohrium-pdf-parser)"
+        ],
+        "summary": "轮询/获取解析结果（返回 cost）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "boolean"
+                  },
+                  "objects": {
+                    "type": "boolean"
+                  },
+                  "pages_dict": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/list": {
+      "get": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "详细项目列表",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/lite_list": {
+      "get": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "精简列表（id+name）",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/set_name": {
+      "post": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "重命名项目",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/set_cost_limit": {
+      "post": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "设置成本上限",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "costLimit": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/{id}/users": {
+      "get": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "项目成员",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/add_user": {
+      "post": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "添加成员",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/del_user": {
+      "post": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "移除成员",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/manager/add": {
+      "post": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "添加管理员",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/manager/del": {
+      "post": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "移除管理员",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/project/{id}/recovery_user": {
+      "put": {
+        "tags": [
+          "项目管理 (bohrium-project)"
+        ],
+        "summary": "恢复被移除成员",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/public/version/search": {
+      "get": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "搜索公开镜像版本",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/public": {
+      "get": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "公开镜像分类",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/public/{image_id}/version": {
+      "get": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "公开镜像版本",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/private": {
+      "post": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "创建私有镜像（Dockerfile 构建）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "device": {
+                    "type": "string"
+                  },
+                  "buildType": {
+                    "type": "string"
+                  },
+                  "dockerfile": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "私有镜像列表",
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/private/{image_id}": {
+      "get": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "私有镜像详情",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "更新镜像描述",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "desc": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/dockerfile/check": {
+      "post": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "校验 Dockerfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dockerfile": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/last_used": {
+      "get": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "最近使用镜像",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/image/{image_id}/share": {
+      "post": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "分享镜像",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "容器镜像 (bohrium-image)"
+        ],
+        "summary": "取消分享",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "device",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/paper-server/scholar/search": {
+      "post": {
+        "tags": [
+          "学者搜索 (bohrium-scholar-search)"
+        ],
+        "summary": "搜索学者",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "school": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "string"
+                  },
+                  "affiliation": {
+                    "type": "string"
+                  },
+                  "affiliationZh": {
+                    "type": "string"
+                  },
+                  "page": {
+                    "type": "integer"
+                  },
+                  "pageSize": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/paper-server/scholar/info": {
+      "get": {
+        "tags": [
+          "学者搜索 (bohrium-scholar-search)"
+        ],
+        "summary": "学者完整画像",
+        "parameters": [
+          {
+            "name": "scholarId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/search/universal": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "统一搜索（词条+关键词+领域）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "style": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/article": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "词条文章全文",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "entry_id": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "style": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/keyword": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "关键词全文",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keyword_id": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "style": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/major_levels": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "学科与层级",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "style": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/level_fields": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "层级下课程（分页）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "node_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "page_num": {
+                    "type": "integer"
+                  },
+                  "page_size": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/get_wiki_index": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "课程章节树+词条",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field_id": {
+                    "type": "string"
+                  },
+                  "node_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/knowledge_graph": {
+      "get": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "主题知识图谱",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip_cross_domain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/knowledge_graph/node": {
+      "get": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "单节点详情",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "node_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/knowledge_graph/relationship": {
+      "get": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "单关系详情",
+        "parameters": [
+          {
+            "name": "src_node_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "desc_node_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/knowledge_graph/search": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "图内查找节点",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/info": {
+      "get": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "词条/关键词统计",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/wiki_v2/search_index_name": {
+      "post": {
+        "tags": [
+          "科学百科 (bohrium-sciencepedia)"
+        ],
+        "summary": "按名称搜索节点",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "node_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/domain": {
+      "get": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "工具领域列表",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/domain/summary": {
+      "get": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "工具总数",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/subdomain": {
+      "post": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "子领域列表（分页）",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "domain_node_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "page": {
+                    "type": "integer"
+                  },
+                  "page_size": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/subdomain/detail": {
+      "post": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "子领域详情",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subdomain_node_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/list": {
+      "post": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "子领域下工具",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subdomain_node_id": {
+                    "type": "string"
+                  },
+                  "tag_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "sort_by": {
+                    "type": "string"
+                  },
+                  "sort_type": {
+                    "type": "string"
+                  },
+                  "page": {
+                    "type": "integer"
+                  },
+                  "page_size": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/detail": {
+      "get": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "工具详情",
+        "parameters": [
+          {
+            "name": "tool_unique_key",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/tags": {
+      "post": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "子领域标签",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subdomain_node_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/search/hybrid": {
+      "post": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "混合工具检索",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "keywords": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "k": {
+                    "type": "integer"
+                  },
+                  "return_level": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/literature-sage/tool/search/subdomain": {
+      "post": {
+        "tags": [
+          "科学工具库 (bohrium-tools)"
+        ],
+        "summary": "子领域搜索",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/v2/search/web": {
+      "get": {
+        "tags": [
+          "网页搜索 (bohrium-web-search)"
+        ],
+        "summary": "开放网页搜索",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "num",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Bohrium AccessKey，环境变量 BOHR_ACCESS_KEY，作为 Bearer token"
+      }
+    },
+    "schemas": {
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "0 成功，2000 未授权"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}

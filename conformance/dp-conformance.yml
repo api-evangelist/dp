@@ -1,0 +1,19 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/dp-bohrium-openapi.json
+standards:
+  - id: oauth2
+    conforms: false
+  - id: oidc
+    conforms: false
+  - id: http-bearer
+    conforms: true
+    evidence: securitySchemes.bearerAuth type http scheme bearer (BOHR_ACCESS_KEY)
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use a numeric-code ApiResponse envelope, not application/problem+json
+  - id: pagination
+    conforms: true
+    evidence: list operations accept page + pageSize query parameters
+  - id: idempotency
+    conforms: false

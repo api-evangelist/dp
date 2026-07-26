@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bohrium OpenAPI
+  version: 1.0.0
+extends: openapi/dp-bohrium-openapi.json
+x-apievangelist:
+  generated: '2026-07-18'
+  method: generated
+  notes:
+    - The upstream spec omits operationIds on all 166 operations; agents and code
+      generators should key on method+path until the provider adds them.
+    - Only 200 responses are documented; 4xx/5xx are conveyed via the ApiResponse
+      envelope code field (see errors/dp-error-codes.json).
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 3
+      x-apievangelist-artifacts:
+        - authentication/dp-authentication.yml
+        - conventions/dp-conventions.yml
+        - errors/dp-error-codes.yml
+        - skills/_index.yml
+  - target: $.servers
+    update:
+      - url: https://open.bohrium.com
+        description: Bohrium OpenAPI production
+      - url: https://openapi.dp.tech
+        description: Bohrium OpenAPI (SDK default base URL)

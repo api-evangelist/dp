@@ -1,0 +1,17 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/dp-bohrium-openapi.json
+format: envelope
+note: >-
+  The Bohrium OpenAPI does not use RFC 9457 problem+json and documents only 200
+  responses; errors are conveyed in the shared ApiResponse envelope via a numeric
+  `code` field. This catalog captures the envelope and the documented codes.
+envelope:
+  schema: ApiResponse
+  fields:
+    - {name: code, type: integer, description: '0 = success; non-zero = error'}
+    - {name: message, type: string, description: Human-readable message}
+    - {name: data, type: object, description: Response payload on success}
+codes:
+  - {code: 0, meaning: Success}
+  - {code: 2000, meaning: Unauthorized (invalid or missing AccessKey)}

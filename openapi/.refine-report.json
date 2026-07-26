@@ -1,0 +1,42 @@
+{
+  "provider": "dp",
+  "sources": [
+    "dp-ai-bohrium-mentor-api-openapi.yml",
+    "dp-bohrium-dataset-api-openapi.yml",
+    "dp-bohrium-file-api-openapi.yml",
+    "dp-bohrium-image-api-openapi.yml",
+    "dp-bohrium-job-api-openapi.yml",
+    "dp-bohrium-knowledge-base-api-openapi.yml",
+    "dp-bohrium-lkm-api-openapi.yml",
+    "dp-bohrium-node-api-openapi.yml",
+    "dp-bohrium-paper-search-api-openapi.yml",
+    "dp-bohrium-project-api-openapi.yml",
+    "dp-bohrium-scholar-search-api-openapi.yml",
+    "dp-bohrium-sciencepedia-api-openapi.yml",
+    "dp-bohrium-tools-api-openapi.yml",
+    "dp-bohrium-web-search-api-openapi.yml",
+    "dp-pdf-bohrium-pdf-parser-api-openapi.yml"
+  ],
+  "outputs": [
+    "dp-ai-bohrium-mentor-api-openapi.yml",
+    "dp-bohrium-dataset-api-openapi.yml",
+    "dp-bohrium-file-api-openapi.yml",
+    "dp-bohrium-image-api-openapi.yml",
+    "dp-bohrium-job-api-openapi.yml",
+    "dp-bohrium-knowledge-base-api-openapi.yml",
+    "dp-bohrium-lkm-api-openapi.yml",
+    "dp-bohrium-node-api-openapi.yml",
+    "dp-bohrium-paper-search-api-openapi.yml",
+    "dp-bohrium-project-api-openapi.yml",
+    "dp-bohrium-scholar-search-api-openapi.yml",
+    "dp-bohrium-sciencepedia-api-openapi.yml",
+    "dp-bohrium-tools-api-openapi.yml",
+    "dp-bohrium-web-search-api-openapi.yml",
+    "dp-pdf-bohrium-pdf-parser-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

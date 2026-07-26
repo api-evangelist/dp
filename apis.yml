@@ -1,25 +1,345 @@
 aid: dp
-name: dp
-description: dp is a company surfaced as a portfolio company of qiming and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+name: DP Technology (Bohrium)
+description: >-
+  DP Technology (Deep Potential Technology, 深势科技) is a global pioneer of the "AI for
+  Science" research paradigm, founded in 2018 with offices in Beijing, Shanghai, Shenzhen,
+  and Yibin. Its Bohrium platform is a research cloud for microscale scientific computing
+  and industrial design — compute jobs, development nodes, datasets, container images,
+  projects, knowledge bases, large knowledge models, paper/patent/scholar search, PDF
+  parsing, a scientific-tools library, and web search — all reachable through the Bohrium
+  OpenAPI (Bearer AccessKey auth, base URL https://open.bohrium.com). DP Technology also
+  founds and maintains the open-source DeepModeling molecular-simulation toolchain
+  (DeePMD-kit, DP-GEN, dpdispatcher, dpdata) and ships a first-party Python SDK, agent SDK,
+  CLI, and 17 official Agent Skills.
 url: https://raw.githubusercontent.com/api-evangelist/dp/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - qiming
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: portfolio-lead-enriched
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://dp.tech/dp-favicon.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- AI for Science
+- Scientific Computing
+- Molecular Simulation
+- Drug Discovery
+- Materials Science
+- Research Cloud
+- Machine Learning
+- HPC
+apis:
+- aid: dp:dp-ai-bohrium-mentor-api
+  name: DP Technology (Bohrium) AI 科学小导师 (bohrium-mentor) API
+  description: >-
+    基于深度推理的科学问答（sigma-search，SSE 编排）。收费：创建会话 2 元/次。注意内部版本混用（sessions v4 / SSE v3 / history v4）。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - AI 科学小导师 (bohrium-mentor)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-ai-bohrium-mentor-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-dataset-api
+  name: DP Technology (Bohrium) 数据集 (bohrium-dataset) API
+  description: 数据集管理 — 创建、上传、下载、版本控制。免费。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 数据集 (bohrium-dataset)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-dataset-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-file-api
+  name: DP Technology (Bohrium) 文件盘 (bohrium-file) API
+  description: personal/share 盘文件管理 — 列出、上传、下载、移动、复制、删除。v1 用于 personal/share，v2 file 仅用于 appJob。免费。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 文件盘 (bohrium-file)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-file-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-image-api
+  name: DP Technology (Bohrium) 容器镜像 (bohrium-image) API
+  description: 容器镜像管理 — 查询、拉取、创建、删除镜像。免费。镜像地址位于 registry.dp.tech / registry.bohrium.dp.tech。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 容器镜像 (bohrium-image)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-image-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-job-api
+  name: DP Technology (Bohrium) 计算任务 (bohrium-job) API
+  description: 计算任务管理 — 提交、查询、终止、删除任务（提交主要经 bohr CLI）。任务运行按机时收费，价格见 Job 定价页。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 计算任务 (bohrium-job)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-job-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-knowledge-base-api
+  name: DP Technology (Bohrium) 知识库 (bohrium-knowledge-base) API
+  description: 知识库管理 — 知识库/文件夹/文献/标签/笔记/召回/权限。网关转发至 literature-sage。免费（仅容量配额）。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 知识库 (bohrium-knowledge-base)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-knowledge-base-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-lkm-api
+  name: DP Technology (Bohrium) 大知识模型 (bohrium-lkm) API
+  description: LKM — 知识节点检索、推理链检索、论文知识图谱、追溯 claim 依据、批量节点水合、提交反馈。收费（定价中，待补充）。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 大知识模型 (bohrium-lkm)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-lkm-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-node-api
+  name: DP Technology (Bohrium) 开发节点 (bohrium-node) API
+  description: 开发节点管理 — 创建、启停、删除容器/虚拟机。运行按机时收费，价格见 Node 定价页。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 开发节点 (bohrium-node)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-node-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-paper-search-api
+  name: DP Technology (Bohrium) 论文与专利搜索 (bohrium-paper-search) API
+  description: RAG 引擎关键词+语义检索。收费。响应可能为多行 JSON（流式，解析第一行）。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 论文与专利搜索 (bohrium-paper-search)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-paper-search-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-project-api
+  name: DP Technology (Bohrium) 项目管理 (bohrium-project) API
+  description: 项目管理 — 创建项目、管理成员、设置额度。免费（管理成本额度，非按调用计费）。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 项目管理 (bohrium-project)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-project-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-scholar-search-api
+  name: DP Technology (Bohrium) 学者搜索 (bohrium-scholar-search) API
+  description: 学者搜索与画像 — 按姓名/机构检索，查看发文/引用/h-index/研究方向。免费。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 学者搜索 (bohrium-scholar-search)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-scholar-search-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-sciencepedia-api
+  name: DP Technology (Bohrium) 科学百科 (bohrium-sciencepedia) API
+  description: 科学百科 — 搜词条/关键词、浏览领域课程、看章节知识点、查主题知识图谱。免费（限时）。阅读链接指向 www.bohrium.com。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 科学百科 (bohrium-sciencepedia)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-sciencepedia-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-tools-api
+  name: DP Technology (Bohrium) 科学工具库 (bohrium-tools) API
+  description: 科学工具库 — 按领域/子领域浏览、混合检索工具、查看详情与分类。免费。语言经 Content-Language 头或 body language 指定。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 科学工具库 (bohrium-tools)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-tools-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-bohrium-web-search-api
+  name: DP Technology (Bohrium) 网页搜索 (bohrium-web-search) API
+  description: 网页搜索 — 代理 searchapi.io 做开放互联网检索。免费。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - 网页搜索 (bohrium-web-search)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-bohrium-web-search-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
+- aid: dp:dp-pdf-bohrium-pdf-parser-api
+  name: DP Technology (Bohrium) PDF 解析 (bohrium-pdf-parser) API
+  description: Uni-Parser — 提取文本、表格、图表、公式。收费：0.05 元/页（触发时扣）。figure 模块无权限时可能 403。
+  humanURL: https://bohrium-doc.dp.tech/en/docs/
+  baseURL: https://open.bohrium.com
+  tags:
+  - PDF 解析 (bohrium-pdf-parser)
+  properties:
+  - type: OpenAPI
+    url: openapi/dp-pdf-bohrium-pdf-parser-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/dp-error-codes.yml
+  - type: Conventions
+    url: conventions/dp-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/dp-lifecycle.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: OpenAPI
+  url: openapi/dp-bohrium-openapi.json
+- type: Authentication
+  url: authentication/dp-authentication.yml
+- type: Conventions
+  url: conventions/dp-conventions.yml
+- type: ErrorCatalog
+  url: errors/dp-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/dp-lifecycle.yml
+- type: Conformance
+  url: conformance/dp-conformance.yml
+- type: Packages
+  url: packages/dp-packages.yml
+- type: SDKs
+  url: packages/dp-packages.yml
+- type: CLI
+  url: cli/dp-cli.yml
+- type: MCPServer
+  url: mcp/dp-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/dp-llms.txt
+- type: Overlay
+  url: overlays/dp-bohrium-overlay.yaml
+- type: WellKnown
+  url: well-known/dp-well-known.yml
+- type: AgenticAccess
+  url: agentic-access/dp-agentic-access.yml
+- type: DomainSecurity
+  url: security/dp-domain-security.yml
+- type: DeveloperPortal
+  url: https://bohrium.dp.tech/developer
+- type: Documentation
+  url: https://bohrium-doc.dp.tech/en/docs/
+- type: APIReference
+  url: https://bohrium-doc.dp.tech/en/docs/
+- type: GitHubOrganization
+  url: https://github.com/dptech-corp
+- type: SignUp
+  url: https://www.bohrium.com/
+- type: Support
+  url: https://www.dp.tech/contact
 - type: Website
   url: https://dp.tech
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

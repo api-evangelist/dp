@@ -1,0 +1,93 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/dptech-corp/bohrium-skills
+note: Official Bohrium Agent Skills published by DP Technology (dptech-corp/bohrium-skills), saved verbatim.
+  17 skills covering the Bohrium platform surface; also distributed as a Claude Code plugin marketplace.
+skills:
+- file: dp-bohrium-database.md
+  name: bohrium-database
+  description: Operate Bohrium private databases with bohrium-open-sdk
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-database/SKILL.md
+- file: dp-bohrium-dataset.md
+  name: bohrium-dataset
+  description: Manage Bohrium datasets via bohr CLI or open.bohrium.com API
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-dataset/SKILL.md
+- file: dp-bohrium-file.md
+  name: bohrium-file
+  description: Manage Bohrium personal/share disk files via open.bohrium.com OpenAPI
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-file/SKILL.md
+- file: dp-bohrium-image.md
+  name: bohrium-image
+  description: Manage Bohrium container images via bohr CLI or open.bohrium.com API
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-image/SKILL.md
+- file: dp-bohrium-job.md
+  name: bohrium-job
+  description: Manage Bohrium compute jobs via bohr CLI or open.bohrium.com API
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-job/SKILL.md
+- file: dp-bohrium-knowledge-base.md
+  name: bohrium-knowledge-base
+  description: Manage Bohrium knowledge bases via open.bohrium.com API
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-knowledge-base/SKILL.md
+- file: dp-bohrium-lkm.md
+  name: bohrium-lkm
+  description: Large Knowledge Model (LKM) via open.bohrium.com (v2)
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-lkm/SKILL.md
+- file: dp-bohrium-mentor.md
+  name: bohrium-mentor
+  description: AI science tutor powered by Bohrium's adk_science_navigator agent. Submits a research question,
+    subscribes to an SSE stream, and returns a structured Markdown answer
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-mentor/SKILL.md
+- file: dp-bohrium-node.md
+  name: bohrium-node
+  description: Manage Bohrium dev nodes (containers/VMs) via open.bohrium.com API
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-node/SKILL.md
+- file: dp-bohrium-paper-search.md
+  name: bohrium-paper-search
+  description: Search academic papers and patents via open.bohrium.com RAG engine
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-paper-search/SKILL.md
+- file: dp-bohrium-pdf-parser.md
+  name: bohrium-pdf-parser
+  description: Parse PDF documents via open.bohrium.com
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-pdf-parser/SKILL.md
+- file: dp-bohrium-project.md
+  name: bohrium-project
+  description: Manage Bohrium projects via bohr CLI or open.bohrium.com API
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-project/SKILL.md
+- file: dp-bohrium-sandbox.md
+  name: bohrium-sandbox
+  description: 'Bohrium platform sandbox (python sdbx.py CLI): on-demand cloud VMs for running shell /
+    Python, with GPU options and optional user-storage mounts'
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-sandbox/SKILL.md
+- file: dp-bohrium-scholar-search.md
+  name: bohrium-scholar-search
+  description: Search scholars and fetch scholar profile via open.bohrium.com
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-scholar-search/SKILL.md
+- file: dp-bohrium-sciencepedia.md
+  name: bohrium-sciencepedia
+  description: Search and read Bohrium SciencePedia (encyclopedia) via open.bohrium.com
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-sciencepedia/SKILL.md
+- file: dp-bohrium-tools.md
+  name: bohrium-tools
+  description: Browse and search the Bohrium scientific Tools library via open.bohrium.com
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-tools/SKILL.md
+- file: dp-bohrium-web-search.md
+  name: bohrium-web-search
+  description: Web search via Bohrium's open-platform proxy (backed by searchapi.io)
+  api: openapi/dp-bohrium-openapi.json
+  source: https://github.com/dptech-corp/bohrium-skills/blob/main/en/bohrium-web-search/SKILL.md

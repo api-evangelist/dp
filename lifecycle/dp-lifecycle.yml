@@ -1,0 +1,17 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/dp-bohrium-openapi.json
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v2
+  docs: https://bohrium-doc.dp.tech/en/docs/
+deprecation:
+  policy_url: null
+  sunset_header: false
+status_page: null
+note: >-
+  Bohrium versions its OpenAPI by URI path (v1/v2 co-exist). No public status page,
+  deprecation policy, or RFC 8594 Sunset-header support was found at probe time
+  (status.dp.tech / status.bohrium.com do not resolve).
+deprecated_operations: []

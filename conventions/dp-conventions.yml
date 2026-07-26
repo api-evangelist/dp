@@ -1,0 +1,33 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/dp-bohrium-openapi.json
+note: >-
+  Cross-cutting request/response semantics for the Bohrium OpenAPI 2.0.0, derived
+  from the spec and the official SKILL.md files. Bohrium exposes no idempotency-key
+  contract, so no Idempotency pointer is emitted.
+authentication:
+  style: bearer
+  header: 'Authorization: Bearer <BOHR_ACCESS_KEY>'
+  env: BOHR_ACCESS_KEY
+  detail: authentication/dp-authentication.yml
+base_url: https://open.bohrium.com
+error_envelope:
+  shape: '{code, data, message}'
+  success: code == 0
+  unauthorized: code == 2000
+  detail: errors/dp-error-codes.yml
+pagination:
+  style: page-number
+  params: [page, pageSize]
+idempotency:
+  supported: false
+versioning:
+  style: uri-path
+  versions: [v1, v2]
+  current: v2
+  detail: lifecycle/dp-lifecycle.yml
+billing:
+  extension: x-bohrium-price
+  note: >-
+    Metered endpoints carry a machine-readable x-bohrium-price OpenAPI extension
+    plus a human-readable billing line at the end of the operation description.

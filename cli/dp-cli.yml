@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: https://bohrium-doc.dp.tech/en/docs/bohrctl/about/
+clis:
+  - name: bohr
+    binary: bohr
+    aka: [bohrctl]
+    description: >-
+      Bohrium CLI (bohr) — next-generation command-line tool from DP Technology to
+      manage resources, submit and monitor compute jobs, and manage projects on the
+      Bohrium platform.
+    docs: https://bohrium-doc.dp.tech/en/docs/bohrctl/about/
+    auth: BOHR_ACCESS_KEY (Bohrium AccessKey)
+    resource_groups:
+      - job
+      - node
+      - project
+      - dataset
+      - image
+      - file
+  - name: bohrium-skills-cli
+    binary: bohrium-skills-cli
+    description: >-
+      Installs and syncs the official Bohrium Agent Skills (zh/ or en/) into local
+      agent skill directories (~/.claude/skills, ~/.agents/skills, ~/.codex/skills).
+    docs: https://github.com/dptech-corp/bohrium-skills/blob/main/docs/cli.md
+    source: https://github.com/dptech-corp/bohrium-skills
+    install:
+      - npm install -g bohrium-skills-cli
+      - GitHub Release binaries (darwin/linux/windows amd64+arm64)
+    commands:
+      - install
