@@ -293,7 +293,7 @@ maintainers:
   email: info@apis.io
 common:
 - type: OpenAPI
-  url: openapi/dp-bohrium-openapi.json
+  url: openapi/_original/dp-bohrium-openapi.json
 - type: Authentication
   url: authentication/dp-authentication.yml
 - type: Conventions
