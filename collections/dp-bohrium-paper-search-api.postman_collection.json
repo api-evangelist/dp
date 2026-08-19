@@ -1,0 +1,259 @@
+{
+  "item": [
+    {
+      "id": "69f23451-9432-4433-a639-1dc17023fc88",
+      "name": "论文与专利搜索 (bohrium-paper-search)",
+      "description": {
+        "content": "RAG 引擎关键词+语义检索。收费。响应可能为多行 JSON（流式，解析第一行）。",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c1cbd82-0c16-43ac-8a95-dfeb03558179",
+          "name": "英文文献 RAG 搜索",
+          "request": {
+            "name": "英文文献 RAG 搜索",
+            "description": {
+              "content": "**计费**：论文搜索 type 0 = 0.05 元/次；type 1 = 0.1 元/次",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "paper",
+                "rag",
+                "pass",
+                "keyword"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"words\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"question\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"startTime\": \"<string>\",\n  \"endTime\": \"<string>\",\n  \"jcrZones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeDbs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"areaIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publicationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subjectIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "02dad1ed-0f5a-4915-801b-083d527d4a28",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "paper",
+                    "rag",
+                    "pass",
+                    "keyword"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"words\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"question\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"startTime\": \"<string>\",\n  \"endTime\": \"<string>\",\n  \"jcrZones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeDbs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"areaIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publicationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subjectIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pageSize\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6202,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "933b9c47-db33-455e-9a78-826903f88db4",
+          "name": "专利 RAG 搜索",
+          "request": {
+            "name": "专利 RAG 搜索",
+            "description": {
+              "content": "**计费**：专利搜索 type 0 = 0.1 元/次；type 1 = 0.3 元/次；type 2 = 0.5 元/次",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "paper",
+                "rag",
+                "pass",
+                "patent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<integer>\",\n  \"words\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"question\": \"<string>\",\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "955e1be5-0327-4f52-bfeb-10cbf521ba6c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "paper",
+                    "rag",
+                    "pass",
+                    "patent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<integer>\",\n  \"words\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"question\": \"<string>\",\n  \"pageSize\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6202,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://open.bohrium.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0805e7d4-b427-4191-aa05-5d39e6b412bb",
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 论文与专利搜索 (bohrium-paper-search) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。\n\n本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。\n\n鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。\n\n计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。\n\n说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。",
+      "type": "text/plain"
+    }
+  }
+}

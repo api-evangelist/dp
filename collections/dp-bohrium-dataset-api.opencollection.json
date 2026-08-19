@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 数据集 (bohrium-dataset) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "数据集 (bohrium-dataset)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "数据集详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "数据集详情"
+        },
+        {
+          "info": {
+            "name": "更新数据集信息",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "更新数据集信息"
+        },
+        {
+          "info": {
+            "name": "版本列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id/version",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "版本列表"
+        },
+        {
+          "info": {
+            "name": "创建新版本",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id/version",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建新版本"
+        },
+        {
+          "info": {
+            "name": "版本详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id/version/:version_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "版本详情"
+        },
+        {
+          "info": {
+            "name": "删除版本",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id/version/:version_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "删除版本"
+        },
+        {
+          "info": {
+            "name": "创建数据集（结尾斜杠必需）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/ds/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建数据集（结尾斜杠必需）"
+        },
+        {
+          "info": {
+            "name": "上传后提交",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://open.bohrium.com/openapi/v2/ds/commit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "上传后提交"
+        },
+        {
+          "info": {
+            "name": "配额检查",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/quota/check",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "配额检查"
+        },
+        {
+          "info": {
+            "name": "获取上传 token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/input/token",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "获取上传 token"
+        },
+        {
+          "info": {
+            "name": "数据集权限",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/:id/permission",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "数据集权限"
+        },
+        {
+          "info": {
+            "name": "关联项目",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/ds/project"
+          },
+          "docs": "关联项目"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

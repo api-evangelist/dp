@@ -1,0 +1,1300 @@
+{
+  "item": [
+    {
+      "id": "f2be067d-dfc6-41e8-87f8-93f0bd3c3217",
+      "name": "科学百科 (bohrium-sciencepedia)",
+      "description": {
+        "content": "科学百科 — 搜词条/关键词、浏览领域课程、看章节知识点、查主题知识图谱。免费（限时）。阅读链接指向 www.bohrium.com。",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2501feb2-17ad-454e-bee9-62afa27fa41c",
+          "name": "统一搜索（词条+关键词+领域）",
+          "request": {
+            "name": "统一搜索（词条+关键词+领域）",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "search",
+                "universal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3647104-7354-4414-9305-968a64f0254b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "search",
+                    "universal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39425928-400c-46bd-bf7f-4e3c67899fef",
+          "name": "词条文章全文",
+          "request": {
+            "name": "词条文章全文",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "article"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entry_id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba81960e-b640-4fab-b928-74275e8de371",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "article"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entry_id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e59f450-54b9-43df-b4ef-31c095e51116",
+          "name": "关键词全文",
+          "request": {
+            "name": "关键词全文",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "keyword"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keyword_id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a23b750-54eb-4fd8-b67f-0fab7064ec17",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "keyword"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyword_id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1cbd753-96a7-4b79-9c55-655002d46cb6",
+          "name": "学科与层级",
+          "request": {
+            "name": "学科与层级",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "major_levels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62bf569d-58c8-4579-919b-b3375be17e7b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "major_levels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"<string>\",\n  \"style\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d615bfdf-271b-4f8a-9997-da7caddaab4d",
+          "name": "层级下课程（分页）",
+          "request": {
+            "name": "层级下课程（分页）",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "level_fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"node_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page_num\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa0729fc-9679-4c97-81f4-725fb5e23e66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "level_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"node_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page_num\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6210f4b3-9f60-4fda-9d66-66af4356d238",
+          "name": "课程章节树+词条",
+          "request": {
+            "name": "课程章节树+词条",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "get_wiki_index"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field_id\": \"<string>\",\n  \"node_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ca0e313-692e-4de1-bc99-aa4d77476481",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "get_wiki_index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field_id\": \"<string>\",\n  \"node_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c05bc558-1016-4772-a887-55d0acb1cbbc",
+          "name": "主题知识图谱",
+          "request": {
+            "name": "主题知识图谱",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "knowledge_graph"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "style",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip_cross_domain",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7249fcb-4cf7-4d7a-b225-6e072a260965",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "knowledge_graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "style",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip_cross_domain",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "617c6e82-2181-4fbd-9753-db691ed61ffa",
+          "name": "单节点详情",
+          "request": {
+            "name": "单节点详情",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "knowledge_graph",
+                "node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "node_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3d775b2-34b5-465c-9d63-8daeb757f6c1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "knowledge_graph",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "310529c8-dfdd-4dca-a0b4-f0a55202ea8e",
+          "name": "单关系详情",
+          "request": {
+            "name": "单关系详情",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "knowledge_graph",
+                "relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "src_node_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "desc_node_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "relation_id",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "704fd261-8482-4ebb-99c4-90ae841e3f38",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "knowledge_graph",
+                    "relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "src_node_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc_node_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relation_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "debcd8ff-2b26-4e3e-9612-4c20067c28e0",
+          "name": "图内查找节点",
+          "request": {
+            "name": "图内查找节点",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "knowledge_graph",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93850e41-e45f-423f-9f4a-4257fd320ae4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "knowledge_graph",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8be3638-d4f0-4479-812a-f2072097d3bb",
+          "name": "词条/关键词统计",
+          "request": {
+            "name": "词条/关键词统计",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87c8b8ac-37c4-47d4-9ed8-08614293b224",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b389f79e-0ade-41d2-8f5e-1264d6ac1501",
+          "name": "按名称搜索节点",
+          "request": {
+            "name": "按名称搜索节点",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "wiki_v2",
+                "search_index_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"node_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c56b921a-854d-4019-8c71-e49da71ecb17",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "wiki_v2",
+                    "search_index_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"node_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1668,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://open.bohrium.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f13421a7-d949-496d-ac76-bc2ce7e6664a",
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 科学百科 (bohrium-sciencepedia) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。\n\n本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。\n\n鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。\n\n计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。\n\n说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。",
+      "type": "text/plain"
+    }
+  }
+}

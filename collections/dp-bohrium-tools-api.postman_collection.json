@@ -1,0 +1,933 @@
+{
+  "item": [
+    {
+      "id": "f4ace9e3-ec3d-46ca-bed9-1f6b708d3fad",
+      "name": "科学工具库 (bohrium-tools)",
+      "description": {
+        "content": "科学工具库 — 按领域/子领域浏览、混合检索工具、查看详情与分类。免费。语言经 Content-Language 头或 body language 指定。",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df382e5d-84b8-4c76-98df-4c1eebca2cde",
+          "name": "工具领域列表",
+          "request": {
+            "name": "工具领域列表",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efeb54ca-f4c5-489d-b89a-1e52b5044d66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37a621d5-6478-4e74-a2c8-13b4aee934ed",
+          "name": "工具总数",
+          "request": {
+            "name": "工具总数",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "domain",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8cccfb3-f9bd-46ed-b0ca-fb6119a53242",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "domain",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a09c28d0-df89-4afe-bc61-0a3da0ce9923",
+          "name": "子领域列表（分页）",
+          "request": {
+            "name": "子领域列表（分页）",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "subdomain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domain_node_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff0140b6-8288-4204-9946-6befa01b0a45",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain_node_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db01e1b3-c122-46c2-8bb7-1559cf45af3a",
+          "name": "子领域详情",
+          "request": {
+            "name": "子领域详情",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "subdomain",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subdomain_node_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "305c53a0-c3cb-4614-a321-72e6f0e59866",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "subdomain",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subdomain_node_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd724472-0e60-480d-997f-7d3ea2533a48",
+          "name": "子领域下工具",
+          "request": {
+            "name": "子领域下工具",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subdomain_node_id\": \"<string>\",\n  \"tag_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": \"<string>\",\n  \"sort_type\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff433b4d-3294-4ae2-808d-393d796c4461",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subdomain_node_id\": \"<string>\",\n  \"tag_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": \"<string>\",\n  \"sort_type\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "815db156-7d5d-424e-aa62-ee8818afdf66",
+          "name": "工具详情",
+          "request": {
+            "name": "工具详情",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tool_unique_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92835adf-d7e5-4933-8f4e-7f261d616ca5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tool_unique_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b8c39d0-3bc4-4080-8bf1-262223a9fcbd",
+          "name": "子领域标签",
+          "request": {
+            "name": "子领域标签",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subdomain_node_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9918b904-5aad-4b94-9b5d-c6231740d531",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subdomain_node_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f258124c-7ce4-4ebd-8b2c-dd7d200c17e2",
+          "name": "混合工具检索",
+          "request": {
+            "name": "混合工具检索",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "search",
+                "hybrid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"<string>\",\n  \"k\": \"<integer>\",\n  \"return_level\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4cd4285d-0b4a-4572-834d-3da35eaee86a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "search",
+                    "hybrid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"<string>\",\n  \"k\": \"<integer>\",\n  \"return_level\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbc80f23-6854-464f-942f-b4742e8db144",
+          "name": "子领域搜索",
+          "request": {
+            "name": "子领域搜索",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "literature-sage",
+                "tool",
+                "search",
+                "subdomain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d1b494b-d975-4dd2-9948-402d671f828f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "literature-sage",
+                    "tool",
+                    "search",
+                    "subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9993,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://open.bohrium.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a5d4499-edeb-46f3-9c39-20dcd285223a",
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 科学工具库 (bohrium-tools) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。\n\n本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。\n\n鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。\n\n计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。\n\n说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。",
+      "type": "text/plain"
+    }
+  }
+}

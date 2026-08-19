@@ -1,0 +1,353 @@
+{
+  "item": [
+    {
+      "id": "4869247a-8836-435c-a8d0-8b590eb10b28",
+      "name": "PDF 解析 (bohrium-pdf-parser)",
+      "description": {
+        "content": "Uni-Parser — 提取文本、表格、图表、公式。收费：0.05 元/页（触发时扣）。figure 模块无权限时可能 403。",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ffea2303-413c-4581-881a-654b059219a7",
+          "name": "按 URL 提交解析",
+          "request": {
+            "name": "按 URL 提交解析",
+            "description": {
+              "content": "**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "parse",
+                "trigger-url-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"sync\": \"<boolean>\",\n  \"textual\": \"<boolean>\",\n  \"table\": \"<boolean>\",\n  \"chart\": \"<boolean>\",\n  \"figure\": \"<boolean>\",\n  \"expression\": \"<boolean>\",\n  \"equation\": \"<boolean>\",\n  \"molecule\": \"<boolean>\",\n  \"pages\": \"<string>\",\n  \"timeout\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87b7e18d-4e82-4400-ad26-3d9f330b057a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "parse",
+                    "trigger-url-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"sync\": \"<boolean>\",\n  \"textual\": \"<boolean>\",\n  \"table\": \"<boolean>\",\n  \"chart\": \"<boolean>\",\n  \"figure\": \"<boolean>\",\n  \"expression\": \"<boolean>\",\n  \"equation\": \"<boolean>\",\n  \"molecule\": \"<boolean>\",\n  \"pages\": \"<string>\",\n  \"timeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 210,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4bf66a8-d93f-4b26-94b9-c6203577e09f",
+          "name": "按文件上传提交解析（multipart）",
+          "request": {
+            "name": "按文件上传提交解析（multipart）",
+            "description": {
+              "content": "**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "parse",
+                "trigger-file-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"file\": \"<string>\",\n  \"sync\": \"<boolean>\",\n  \"textual\": \"<boolean>\",\n  \"table\": \"<boolean>\",\n  \"chart\": \"<boolean>\",\n  \"figure\": \"<boolean>\",\n  \"expression\": \"<boolean>\",\n  \"equation\": \"<boolean>\",\n  \"molecule\": \"<boolean>\",\n  \"pages\": \"<string>\",\n  \"timeout\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65be8974-bded-4169-8579-1f7a1f221692",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "parse",
+                    "trigger-file-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"file\": \"<string>\",\n  \"sync\": \"<boolean>\",\n  \"textual\": \"<boolean>\",\n  \"table\": \"<boolean>\",\n  \"chart\": \"<boolean>\",\n  \"figure\": \"<boolean>\",\n  \"expression\": \"<boolean>\",\n  \"equation\": \"<boolean>\",\n  \"molecule\": \"<boolean>\",\n  \"pages\": \"<string>\",\n  \"timeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 210,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff66327c-82aa-4ce9-b245-827eed6ae65b",
+          "name": "轮询/获取解析结果（返回 cost）",
+          "request": {
+            "name": "轮询/获取解析结果（返回 cost）",
+            "description": {},
+            "url": {
+              "path": [
+                "openapi",
+                "v2",
+                "parse",
+                "get-result"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"content\": \"<boolean>\",\n  \"objects\": \"<boolean>\",\n  \"pages_dict\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6fcbb6a8-393f-4814-a854-10588bbedb1f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openapi",
+                    "v2",
+                    "parse",
+                    "get-result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"content\": \"<boolean>\",\n  \"objects\": \"<boolean>\",\n  \"pages_dict\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 210,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://open.bohrium.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "74f0a175-cbb6-4f1c-9ff9-a7fb03f703e9",
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) PDF 解析 (bohrium-pdf-parser) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。\n\n本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。\n\n鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。\n\n计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。\n\n说明：`bohrium-database`（SDK/CLI）与 `bohrium-sandbox`（CLI）不直接暴露 REST 端点，故本文档未收录其路径。",
+      "type": "text/plain"
+    }
+  }
+}

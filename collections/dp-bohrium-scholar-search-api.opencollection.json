@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 学者搜索 (bohrium-scholar-search) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "学者搜索 (bohrium-scholar-search)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "搜索学者",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/paper-server/scholar/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "搜索学者"
+        },
+        {
+          "info": {
+            "name": "学者完整画像",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/paper-server/scholar/info",
+            "params": [
+              {
+                "name": "scholarId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "学者完整画像"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

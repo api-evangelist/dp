@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 科学工具库 (bohrium-tools) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "科学工具库 (bohrium-tools)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "工具领域列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/domain"
+          },
+          "docs": "工具领域列表"
+        },
+        {
+          "info": {
+            "name": "工具总数",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/domain/summary"
+          },
+          "docs": "工具总数"
+        },
+        {
+          "info": {
+            "name": "子领域列表（分页）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/subdomain",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "子领域列表（分页）"
+        },
+        {
+          "info": {
+            "name": "子领域详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/subdomain/detail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "子领域详情"
+        },
+        {
+          "info": {
+            "name": "子领域下工具",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "子领域下工具"
+        },
+        {
+          "info": {
+            "name": "工具详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/detail",
+            "params": [
+              {
+                "name": "tool_unique_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "工具详情"
+        },
+        {
+          "info": {
+            "name": "子领域标签",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "子领域标签"
+        },
+        {
+          "info": {
+            "name": "混合工具检索",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/search/hybrid",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "混合工具检索"
+        },
+        {
+          "info": {
+            "name": "子领域搜索",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/tool/search/subdomain",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "子领域搜索"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

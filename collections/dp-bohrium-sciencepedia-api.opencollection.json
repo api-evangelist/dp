@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 科学百科 (bohrium-sciencepedia) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "科学百科 (bohrium-sciencepedia)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "统一搜索（词条+关键词+领域）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/search/universal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "统一搜索（词条+关键词+领域）"
+        },
+        {
+          "info": {
+            "name": "词条文章全文",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/article",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "词条文章全文"
+        },
+        {
+          "info": {
+            "name": "关键词全文",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/keyword",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "关键词全文"
+        },
+        {
+          "info": {
+            "name": "学科与层级",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/major_levels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "学科与层级"
+        },
+        {
+          "info": {
+            "name": "层级下课程（分页）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/level_fields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "层级下课程（分页）"
+        },
+        {
+          "info": {
+            "name": "课程章节树+词条",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/get_wiki_index",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "课程章节树+词条"
+        },
+        {
+          "info": {
+            "name": "主题知识图谱",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/knowledge_graph",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "style",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip_cross_domain",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "主题知识图谱"
+        },
+        {
+          "info": {
+            "name": "单节点详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/knowledge_graph/node",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "node_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "单节点详情"
+        },
+        {
+          "info": {
+            "name": "单关系详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/knowledge_graph/relationship",
+            "params": [
+              {
+                "name": "src_node_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "desc_node_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "relation_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "单关系详情"
+        },
+        {
+          "info": {
+            "name": "图内查找节点",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/knowledge_graph/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "图内查找节点"
+        },
+        {
+          "info": {
+            "name": "词条/关键词统计",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/info"
+          },
+          "docs": "词条/关键词统计"
+        },
+        {
+          "info": {
+            "name": "按名称搜索节点",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/literature-sage/wiki_v2/search_index_name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "按名称搜索节点"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

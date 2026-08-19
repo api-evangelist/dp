@@ -1,0 +1,374 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 文件盘 (bohrium-file) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "文件盘 (bohrium-file)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "解析当前身份 (user_id/orgId)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/ak/get"
+          },
+          "docs": "解析当前身份 (user_id/orgId)"
+        },
+        {
+          "info": {
+            "name": "列目录",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/iterate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "列目录"
+        },
+        {
+          "info": {
+            "name": "文件是否存在/状态",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/file/stat/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "文件是否存在/状态"
+        },
+        {
+          "info": {
+            "name": "文件元数据",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/file/meta/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "文件元数据"
+        },
+        {
+          "info": {
+            "name": "下载（可能 302，需 -L）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/file/download/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "下载（可能 302，需 -L）"
+        },
+        {
+          "info": {
+            "name": "创建目录",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/mkdir",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建目录"
+        },
+        {
+          "info": {
+            "name": "移动/重命名",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移动/重命名"
+        },
+        {
+          "info": {
+            "name": "移动（递归）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/mover",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移动（递归）"
+        },
+        {
+          "info": {
+            "name": "复制",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/copy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "复制"
+        },
+        {
+          "info": {
+            "name": "复制（递归）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/copyr",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "复制（递归）"
+        },
+        {
+          "info": {
+            "name": "删除",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://open.bohrium.com/openapi/v1/file/delete/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "删除"
+        },
+        {
+          "info": {
+            "name": "删除（递归）",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://open.bohrium.com/openapi/v1/file/deleter/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "删除（递归）"
+        },
+        {
+          "info": {
+            "name": "解压",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/decompress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "解压"
+        },
+        {
+          "info": {
+            "name": "获取上传凭证（推荐）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/file/upload/binary",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "获取上传凭证（推荐）"
+        },
+        {
+          "info": {
+            "name": "直接上传（返回 307，需 -L）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/file/upload/binary",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Body 为二进制文件内容 (--data-binary)。"
+        },
+        {
+          "info": {
+            "name": "列目录（仅 appJob 工作区）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/file/iterate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "列目录（仅 appJob 工作区）"
+        },
+        {
+          "info": {
+            "name": "下载（仅 appJob 工作区）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/file/download",
+            "params": [
+              {
+                "name": "pathType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pathKey",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "下载（仅 appJob 工作区）"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

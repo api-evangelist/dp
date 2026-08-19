@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 网页搜索 (bohrium-web-search) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "网页搜索 (bohrium-web-search)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "开放网页搜索",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/search/web",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "num",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "开放网页搜索"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

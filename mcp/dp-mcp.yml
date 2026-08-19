@@ -676,3 +676,9 @@ tools:
   description: 开放网页搜索
   group: bohrium-web-search
   source_operation: openapi/dp-bohrium-openapi.json#GET /openapi/v2/search/web
+deployment:
+  mode: none
+  verified: derived
+  tools: 166
+  checked: '2026-08-12'
+  source: catalog MCP census

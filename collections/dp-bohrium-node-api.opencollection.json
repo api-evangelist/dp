@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 开发节点 (bohrium-node) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "开发节点 (bohrium-node)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "创建节点（非交互）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/node/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**计费**：按机时收费（元/小时），价格见 Node 定价页"
+        },
+        {
+          "info": {
+            "name": "可用机型资源",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/node/resources"
+          },
+          "docs": "可用机型资源"
+        },
+        {
+          "info": {
+            "name": "资源价格（元/小时）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/node/resources/price",
+            "params": [
+              {
+                "name": "skuId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "资源价格（元/小时）"
+        },
+        {
+          "info": {
+            "name": "节点详情（含 SSH 密码）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/node/:machine_id",
+            "params": [
+              {
+                "name": "machine_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "节点详情（含 SSH 密码）"
+        },
+        {
+          "info": {
+            "name": "重启节点",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/node/restart/:machine_id",
+            "params": [
+              {
+                "name": "machine_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "重启节点"
+        },
+        {
+          "info": {
+            "name": "重命名节点",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/node/modify/:machine_id",
+            "params": [
+              {
+                "name": "machine_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "重命名节点"
+        },
+        {
+          "info": {
+            "name": "查看绑定的数据集",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/node/ds",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "查看绑定的数据集"
+        },
+        {
+          "info": {
+            "name": "绑定数据集",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/node/ds/bind",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "绑定数据集"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

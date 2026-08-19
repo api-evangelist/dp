@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) PDF 解析 (bohrium-pdf-parser) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PDF 解析 (bohrium-pdf-parser)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "按 URL 提交解析",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/parse/trigger-url-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）"
+        },
+        {
+          "info": {
+            "name": "按文件上传提交解析（multipart）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/parse/trigger-file-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**计费**：0.05 元/页（触发解析时扣，get-result 查询结果免费）"
+        },
+        {
+          "info": {
+            "name": "轮询/获取解析结果（返回 cost）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/parse/get-result",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "轮询/获取解析结果（返回 cost）"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

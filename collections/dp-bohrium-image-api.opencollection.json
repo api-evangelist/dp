@@ -1,0 +1,265 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 容器镜像 (bohrium-image) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "容器镜像 (bohrium-image)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "搜索公开镜像版本",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/image/public/version/search",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "搜索公开镜像版本"
+        },
+        {
+          "info": {
+            "name": "公开镜像分类",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/image/public",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "公开镜像分类"
+        },
+        {
+          "info": {
+            "name": "公开镜像版本",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/image/public/:image_id/version",
+            "params": [
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "公开镜像版本"
+        },
+        {
+          "info": {
+            "name": "私有镜像列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/image/private",
+            "params": [
+              {
+                "name": "device",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "私有镜像列表"
+        },
+        {
+          "info": {
+            "name": "创建私有镜像（Dockerfile 构建）",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/image/private",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建私有镜像（Dockerfile 构建）"
+        },
+        {
+          "info": {
+            "name": "私有镜像详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/image/private/:image_id",
+            "params": [
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "私有镜像详情"
+        },
+        {
+          "info": {
+            "name": "更新镜像描述",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://open.bohrium.com/openapi/v2/image/private/:image_id",
+            "params": [
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "更新镜像描述"
+        },
+        {
+          "info": {
+            "name": "校验 Dockerfile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/image/dockerfile/check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "校验 Dockerfile"
+        },
+        {
+          "info": {
+            "name": "最近使用镜像",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/image/last_used",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "最近使用镜像"
+        },
+        {
+          "info": {
+            "name": "分享镜像",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/image/:image_id/share",
+            "params": [
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "分享镜像"
+        },
+        {
+          "info": {
+            "name": "取消分享",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://open.bohrium.com/openapi/v2/image/:image_id/share",
+            "params": [
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "device",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "取消分享"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

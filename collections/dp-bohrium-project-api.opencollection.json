@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 项目管理 (bohrium-project) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "项目管理 (bohrium-project)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "详细项目列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/project/list"
+          },
+          "docs": "详细项目列表"
+        },
+        {
+          "info": {
+            "name": "精简列表（id+name）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/project/lite_list"
+          },
+          "docs": "精简列表（id+name）"
+        },
+        {
+          "info": {
+            "name": "重命名项目",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/project/set_name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "重命名项目"
+        },
+        {
+          "info": {
+            "name": "设置成本上限",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/project/set_cost_limit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "设置成本上限"
+        },
+        {
+          "info": {
+            "name": "项目成员",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/project/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "项目成员"
+        },
+        {
+          "info": {
+            "name": "添加成员",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/project/add_user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "添加成员"
+        },
+        {
+          "info": {
+            "name": "移除成员",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/project/del_user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移除成员"
+        },
+        {
+          "info": {
+            "name": "添加管理员",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/project/manager/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "添加管理员"
+        },
+        {
+          "info": {
+            "name": "移除管理员",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/project/manager/del",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移除管理员"
+        },
+        {
+          "info": {
+            "name": "恢复被移除成员",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://open.bohrium.com/openapi/v2/project/:id/recovery_user",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "恢复被移除成员"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

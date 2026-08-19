@@ -1,0 +1,1048 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 知识库 (bohrium-knowledge-base) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "知识库 (bohrium-knowledge-base)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "创建知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建知识库"
+        },
+        {
+          "info": {
+            "name": "我的知识库列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/list",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "我的知识库列表"
+        },
+        {
+          "info": {
+            "name": "更新知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "更新知识库"
+        },
+        {
+          "info": {
+            "name": "知识库详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/:node_id",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "知识库详情"
+        },
+        {
+          "info": {
+            "name": "发现公开知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/discover"
+          },
+          "docs": "发现公开知识库"
+        },
+        {
+          "info": {
+            "name": "推荐知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/recommendation"
+          },
+          "docs": "推荐知识库"
+        },
+        {
+          "info": {
+            "name": "我的收藏",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/favorite"
+          },
+          "docs": "我的收藏"
+        },
+        {
+          "info": {
+            "name": "收藏知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/favorite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "收藏知识库"
+        },
+        {
+          "info": {
+            "name": "取消收藏",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/unfavorite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "取消收藏"
+        },
+        {
+          "info": {
+            "name": "记录浏览",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/browse/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "记录浏览"
+        },
+        {
+          "info": {
+            "name": "浏览历史",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/browse/query"
+          },
+          "docs": "浏览历史"
+        },
+        {
+          "info": {
+            "name": "搜索历史",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/history/query"
+          },
+          "docs": "搜索历史"
+        },
+        {
+          "info": {
+            "name": "按名称搜索知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/knowledge_base/search/name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "按名称搜索知识库"
+        },
+        {
+          "info": {
+            "name": "根目录（知识库列表）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/root"
+          },
+          "docs": "根目录（知识库列表）"
+        },
+        {
+          "info": {
+            "name": "子目录",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/children",
+            "params": [
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "子目录"
+        },
+        {
+          "info": {
+            "name": "目录树",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/directory"
+          },
+          "docs": "目录树"
+        },
+        {
+          "info": {
+            "name": "含文献的文件树",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/file_tree"
+          },
+          "docs": "含文献的文件树"
+        },
+        {
+          "info": {
+            "name": "创建文件夹",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建文件夹"
+        },
+        {
+          "info": {
+            "name": "重命名文件夹",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "重命名文件夹"
+        },
+        {
+          "info": {
+            "name": "移动文件夹",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移动文件夹"
+        },
+        {
+          "info": {
+            "name": "删除文件夹/知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/folder/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "删除文件夹/知识库"
+        },
+        {
+          "info": {
+            "name": "文献列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file",
+            "params": [
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "noTag",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "文献列表"
+        },
+        {
+          "info": {
+            "name": "文献详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/detail",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "文献详情"
+        },
+        {
+          "info": {
+            "name": "获取下载链接",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/read",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "获取下载链接"
+        },
+        {
+          "info": {
+            "name": "获取上传凭证",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/multipart",
+            "params": [
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "md5",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "获取上传凭证"
+        },
+        {
+          "info": {
+            "name": "登记已上传文件",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "登记已上传文件"
+        },
+        {
+          "info": {
+            "name": "编辑文献元数据",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/edit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "编辑文献元数据"
+        },
+        {
+          "info": {
+            "name": "删除文献",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/delete_literature",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "删除文献"
+        },
+        {
+          "info": {
+            "name": "重命名文献",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/update_literature",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "重命名文献"
+        },
+        {
+          "info": {
+            "name": "移动文献",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移动文献"
+        },
+        {
+          "info": {
+            "name": "内容搜索",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "内容搜索"
+        },
+        {
+          "info": {
+            "name": "按 userResourceId/enclosureId 取元信息",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/fileinfo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "按 userResourceId/enclosureId 取元信息"
+        },
+        {
+          "info": {
+            "name": "文件夹下全部文献 ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/ids",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "文件夹下全部文献 ID"
+        },
+        {
+          "info": {
+            "name": "单文件标签信息",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/tagInfo",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "单文件标签信息"
+        },
+        {
+          "info": {
+            "name": "上传记录",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/upload/record"
+          },
+          "docs": "上传记录"
+        },
+        {
+          "info": {
+            "name": "容量使用",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/capacity"
+          },
+          "docs": "容量使用"
+        },
+        {
+          "info": {
+            "name": "标签统计",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/tag",
+            "params": [
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rootFolderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "标签统计"
+        },
+        {
+          "info": {
+            "name": "给文件打标签",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/tag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "给文件打标签"
+        },
+        {
+          "info": {
+            "name": "取消标签",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/file/untag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "取消标签"
+        },
+        {
+          "info": {
+            "name": "标签列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/tag",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "标签列表"
+        },
+        {
+          "info": {
+            "name": "创建标签",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/tag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建标签"
+        },
+        {
+          "info": {
+            "name": "编辑标签",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/tag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "编辑标签"
+        },
+        {
+          "info": {
+            "name": "删除标签",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/tag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "删除标签"
+        },
+        {
+          "info": {
+            "name": "获取笔记",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/note",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "获取笔记"
+        },
+        {
+          "info": {
+            "name": "创建/更新笔记",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/note",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "创建/更新笔记"
+        },
+        {
+          "info": {
+            "name": "单篇文献切片",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/box/search_by_md5_paper_id",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "单篇文献切片"
+        },
+        {
+          "info": {
+            "name": "指定文献内召回",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/recall/papers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "指定文献内召回"
+        },
+        {
+          "info": {
+            "name": "知识库混合召回",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/recall/hybrid",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "知识库混合召回"
+        },
+        {
+          "info": {
+            "name": "权限列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/acl",
+            "params": [
+              {
+                "name": "nodesId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "权限列表"
+        },
+        {
+          "info": {
+            "name": "设置分享状态",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/share_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "设置分享状态"
+        },
+        {
+          "info": {
+            "name": "更新用户角色",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/user_role",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "更新用户角色"
+        },
+        {
+          "info": {
+            "name": "移除用户角色",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/user_role",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "移除用户角色"
+        },
+        {
+          "info": {
+            "name": "批量添加读者",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/batch_add_readers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "批量添加读者"
+        },
+        {
+          "info": {
+            "name": "查询加入申请",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/join_request"
+          },
+          "docs": "查询加入申请"
+        },
+        {
+          "info": {
+            "name": "申请加入",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/join_request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "申请加入"
+        },
+        {
+          "info": {
+            "name": "审批加入申请",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/join_request"
+          },
+          "docs": "审批加入申请"
+        },
+        {
+          "info": {
+            "name": "查询用户角色",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/user_knowledge_base_role",
+            "params": [
+              {
+                "name": "nodesId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "查询用户角色"
+        },
+        {
+          "info": {
+            "name": "已加入知识库（树）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/knowledge_base/join/tree"
+          },
+          "docs": "已加入知识库（树）"
+        },
+        {
+          "info": {
+            "name": "加入详情",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/knowledge_base/join/detail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "加入详情"
+        },
+        {
+          "info": {
+            "name": "退出知识库",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/knowledge_base/exit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "退出知识库"
+        },
+        {
+          "info": {
+            "name": "待处理加入申请",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/user_pending_join_req",
+            "params": [
+              {
+                "name": "nodesId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "待处理加入申请"
+        },
+        {
+          "info": {
+            "name": "我提交的加入申请",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/join_request/personal"
+          },
+          "docs": "我提交的加入申请"
+        },
+        {
+          "info": {
+            "name": "可审批的加入申请",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/join_request/manageable"
+          },
+          "docs": "可审批的加入申请"
+        },
+        {
+          "info": {
+            "name": "飞书机器人消息",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/knowledge/account/feishu_bot/send_message",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "飞书机器人消息"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

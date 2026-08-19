@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 大知识模型 (bohrium-lkm) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "大知识模型 (bohrium-lkm)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "检索 claim/question/abstract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/lkm/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**计费**：按调用计费，实际费用以账单为准"
+        },
+        {
+          "info": {
+            "name": "推理链检索",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/lkm/reasoning/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "推理链检索"
+        },
+        {
+          "info": {
+            "name": "论文级知识图谱",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/lkm/papers/graph",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "论文级知识图谱"
+        },
+        {
+          "info": {
+            "name": "单 claim 推理链",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v2/lkm/claims/:id/reasoning",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_chains",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "单 claim 推理链"
+        },
+        {
+          "info": {
+            "name": "批量水合节点",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/lkm/variables/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "批量水合节点"
+        },
+        {
+          "info": {
+            "name": "提交反馈",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/lkm/feedback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "提交反馈"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 计算任务 (bohrium-job) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "计算任务 (bohrium-job)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "任务列表",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/job/list",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "任务列表"
+        },
+        {
+          "info": {
+            "name": "任务配置（含文件 token）",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/job/view/conf/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "任务配置（含文件 token）"
+        },
+        {
+          "info": {
+            "name": "任务快照",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://open.bohrium.com/openapi/v1/job/:job_id/snapshot",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "任务快照"
+        },
+        {
+          "info": {
+            "name": "重命名任务",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/job/:job_id/modify",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "重命名任务"
+        },
+        {
+          "info": {
+            "name": "重命名任务组",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v1/job_group/:job_group_id/modify",
+            "params": [
+              {
+                "name": "job_group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "重命名任务组"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 论文与专利搜索 (bohrium-paper-search) API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "论文与专利搜索 (bohrium-paper-search)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "英文文献 RAG 搜索",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/paper/rag/pass/keyword",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**计费**：论文搜索 type 0 = 0.05 元/次；type 1 = 0.1 元/次"
+        },
+        {
+          "info": {
+            "name": "专利 RAG 搜索",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open.bohrium.com/openapi/v2/paper/rag/pass/patent",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**计费**：专利搜索 type 0 = 0.1 元/次；type 1 = 0.3 元/次；type 2 = 0.5 元/次"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
