@@ -314,6 +314,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/dp-capability-edges.yml
+  name: DP Technology (Bohrium) Business Capability Map
 - type: OpenAPI
   url: openapi/_original/dp-bohrium-openapi.json
 - type: Authentication

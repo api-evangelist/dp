@@ -1,0 +1,47 @@
+slug: dp
+provider: DP Technology (Bohrium)
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Electrical Components & Equipment
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: 开发节点 (bohrium-node)
+  spec_file: dp-bohrium-node-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /openapi/v2/node/add 创建节点（非交互）; GET /openapi/v2/node/resources 可用机型资源; POST /openapi/v2/node/restart/{machine_id}
+    重启节点
+  reason: Provisioning, sizing, pricing and restarting of compute machines with SSH access is straightforward
+    compute infrastructure provisioning — IT Infrastructure Management.
+- tag: 知识库 (bohrium-knowledge-base)
+  spec_file: dp-bohrium-knowledge-base-api-openapi.yml
+  capability_id: BC-830
+  capability_id_l1: BC-830
+  capability_name: Knowledge Management
+  confidence: 0.7
+  evidence: POST /openapi/v2/knowledge/knowledge_base/create 创建知识库; GET /openapi/v2/knowledge/knowledge_base/discover
+    发现公开知识库; POST /openapi/v2/knowledge/knowledge_base/favorite 收藏知识库
+  reason: Operations create, update, publish/discover, favourite and track browsing of knowledge bases
+    — capture, curation and sharing of knowledge assets. L1 Knowledge Management is supported; the surface
+    spans capture, curation and sharing so no single L2 is named.
+- tag: 科学百科 (bohrium-sciencepedia)
+  spec_file: dp-bohrium-sciencepedia-api-openapi.yml
+  capability_id: BC-830.20
+  capability_id_l1: BC-830
+  capability_name: Knowledge Curation & Taxonomy Management
+  confidence: 0.7
+  evidence: POST /openapi/v2/literature-sage/wiki_v2/article 词条文章全文; POST /openapi/v2/literature-sage/wiki_v2/major_levels
+    学科与层级; GET /openapi/v2/literature-sage/wiki_v2/knowledge_graph 主题知识图谱
+  reason: Encyclopaedia entries, subject/level hierarchies, chapter trees and a knowledge graph of nodes
+    and relationships — an explicitly curated knowledge corpus with taxonomy/ontology, matching Knowledge
+    Curation & Taxonomy Management.
