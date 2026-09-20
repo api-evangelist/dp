@@ -1,0 +1,84 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://bohrium-doc.dp.tech/en/docs/bohrctl/pricing/
+sources:
+- https://bohrium-doc.dp.tech/en/docs/bohrctl/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T130003
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+published: true
+note: CLI pricing doc listing per-action and machine-hour charges in CNY or Photons; free tiers of 1,000
+  calls for wiki and LKM search.
+plan_count: 11
+currency: CNY
+plans:
+- name: Compute jobs (bohr job)
+  price_text: CNY / hour
+  currency: CNY
+  period: per-use
+  unit: hour
+  overage: Machine-hour fee while running, varies by machine type
+- name: Development nodes (bohr node)
+  price_text: CNY / hour
+  currency: CNY
+  period: per-use
+  unit: hour
+  overage: Machine-hour fee while running, varies by machine type
+- name: Sandboxes (bohr sandbox)
+  price_text: Machine hours
+  period: per-use
+  unit: machine hour
+  overage: Machine-hour fee while running
+- name: AI mentor
+  price_text: 2 CNY / session or 200 Photons / session
+  currency: CNY
+  period: per-use
+  unit: session
+  overage: Charged when a session is created
+- name: Paper and patent search
+  price_text: From 0.05 CNY / query or 5 Photons / query
+  currency: CNY
+  period: per-use
+  unit: query
+  overage: 'Papers: standard 0.05 CNY (or 5 Photons), enhanced 0.1 CNY (or 10 Photons) per query; patents:
+    standard 0.1 CNY, enhanced 0.3 CNY, professional 0.5 CNY per query'
+- name: PDF parsing
+  price_text: 0.05 CNY / page or 5 Photons / page
+  currency: CNY
+  period: per-use
+  unit: page
+  overage: Charged when parsing is triggered
+- name: LKM PDF knowledge extraction
+  price_text: 1 CNY / successful task or 100 Photons / successful task
+  currency: CNY
+  period: per-use
+  unit: successful task
+  overage: 0.1 CNY or 10 Photons on a cache hit
+- name: SciMaster paper agents
+  price_text: Usage-based
+  period: per-use
+  unit: task
+  overage: Billed per paper-search or review task
+- name: SciencePedia (bohr wiki)
+  price_text: First 1,000 calls free
+  price: 1000
+  period: per-use
+  unit: call
+  included_quota: First 1,000 calls free
+  overage: Then 0.01–0.02 CNY or 1–2 Photons per call
+- name: Literature Knowledge Mining queries
+  price_text: First 1,000 calls free
+  price: 1000
+  period: per-use
+  unit: call
+  included_quota: First 1,000 calls free
+  overage: Then 0.05 CNY or 5 Photons per call
+- name: Bohrium CLI
+  price_text: free and open source (MIT)
+  period: none
+  included_quota: Dataset, image, project, knowledge base, scholar/web search, file, machine, job group,
+    tools commands

@@ -315,6 +315,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Pricing
+  url: https://bohrium-doc.dp.tech/en/docs/bohrctl/pricing/
+- type: Plans
+  url: plans/dp-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/dp-capability-edges.yml
   name: DP Technology (Bohrium) Business Capability Map
