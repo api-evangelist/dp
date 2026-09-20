@@ -10,6 +10,11 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: developer-api
 pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  open_source_license: MIT
 published: true
 note: CLI pricing doc listing per-action and machine-hour charges in CNY or Photons; free tiers of 1,000
   calls for wiki and LKM search.
