@@ -1,0 +1,25 @@
+# Front Door AI Index — dp — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: dp
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: dp.tech
+  final_host: www.dp.tech
+  ownership: own
+  owner: dp
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 8
+  host_score: 8
+  density: 156.86
+  words: 51
+  tiers:
+    agentic: 0
+    core: 8
+    model: 0
+  ambiguous: 0
+  top_terms:
+    AI: 8

@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 科学百科 (bohrium-sciencepedia) API
+  title: Bohrium Open 科学百科 (bohrium-sciencepedia) API
   description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
 
 
-    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh//SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
 
 
-    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+    鉴权：所有接口使用 `Authorization: Bearer `。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
 
 
     计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
@@ -48,6 +48,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2SearchUniversal
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/article:
     post:
       tags:
@@ -72,6 +74,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2Article
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/keyword:
     post:
       tags:
@@ -96,6 +100,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2Keyword
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/major_levels:
     post:
       tags:
@@ -118,6 +124,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2MajorLevels
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/level_fields:
     post:
       tags:
@@ -144,6 +152,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2LevelFields
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/get_wiki_index:
     post:
       tags:
@@ -166,6 +176,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2GetWikiIndex
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/knowledge_graph:
     get:
       tags:
@@ -199,6 +211,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2LiteratureSageWikiV2KnowledgeGraph
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/knowledge_graph/node:
     get:
       tags:
@@ -222,6 +236,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2LiteratureSageWikiV2KnowledgeGraphNode
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/knowledge_graph/relationship:
     get:
       tags:
@@ -250,6 +266,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2LiteratureSageWikiV2KnowledgeGraphRelationship
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/knowledge_graph/search:
     post:
       tags:
@@ -270,6 +288,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2KnowledgeGraphSearch
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/info:
     get:
       tags:
@@ -282,6 +302,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2LiteratureSageWikiV2Info
+      x-operation-id-source: derived
   /openapi/v2/literature-sage/wiki_v2/search_index_name:
     post:
       tags:
@@ -304,6 +326,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2LiteratureSageWikiV2SearchIndexName
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResponse:

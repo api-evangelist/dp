@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 文件盘 (bohrium-file) API
+  title: Bohrium Open 文件盘 (bohrium-file) API
   description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
 
 
-    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh//SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
 
 
-    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+    鉴权：所有接口使用 `Authorization: Bearer `。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
 
 
     计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
@@ -36,6 +36,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV1AkGet
+      x-operation-id-source: derived
   /openapi/v1/file/iterate:
     post:
       tags:
@@ -66,6 +68,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileIterate
+      x-operation-id-source: derived
   /openapi/v1/file/stat/{path}:
     get:
       tags:
@@ -94,6 +98,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV1FileStatByPath
+      x-operation-id-source: derived
   /openapi/v1/file/meta/{path}:
     get:
       tags:
@@ -122,6 +128,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV1FileMetaByPath
+      x-operation-id-source: derived
   /openapi/v1/file/download/{path}:
     get:
       tags:
@@ -150,6 +158,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV1FileDownloadByPath
+      x-operation-id-source: derived
   /openapi/v1/file/mkdir:
     post:
       tags:
@@ -174,6 +184,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileMkdir
+      x-operation-id-source: derived
   /openapi/v1/file/move:
     post:
       tags:
@@ -196,6 +208,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileMove
+      x-operation-id-source: derived
   /openapi/v1/file/mover:
     post:
       tags:
@@ -218,6 +232,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileMover
+      x-operation-id-source: derived
   /openapi/v1/file/copy:
     post:
       tags:
@@ -240,6 +256,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileCopy
+      x-operation-id-source: derived
   /openapi/v1/file/copyr:
     post:
       tags:
@@ -262,6 +280,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileCopyr
+      x-operation-id-source: derived
   /openapi/v1/file/delete/{path}:
     delete:
       tags:
@@ -290,6 +310,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: deleteOpenapiV1FileDeleteByPath
+      x-operation-id-source: derived
   /openapi/v1/file/deleter/{path}:
     delete:
       tags:
@@ -318,6 +340,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: deleteOpenapiV1FileDeleterByPath
+      x-operation-id-source: derived
   /openapi/v1/file/decompress:
     post:
       tags:
@@ -340,6 +364,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileDecompress
+      x-operation-id-source: derived
   /openapi/v2/file/upload/binary:
     get:
       tags:
@@ -368,6 +394,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2FileUploadBinary
+      x-operation-id-source: derived
   /openapi/v1/file/upload/binary:
     post:
       tags:
@@ -397,6 +425,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV1FileUploadBinary
+      x-operation-id-source: derived
   /openapi/v2/file/iterate:
     post:
       tags:
@@ -419,6 +449,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2FileIterate
+      x-operation-id-source: derived
   /openapi/v2/file/download:
     get:
       tags:
@@ -442,6 +474,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2FileDownload
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResponse:

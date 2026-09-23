@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 论文与专利搜索 (bohrium-paper-search) API
+  title: Bohrium Open 论文与专利搜索 (bohrium-paper-search) API
   description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
 
 
-    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh//SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
 
 
-    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+    鉴权：所有接口使用 `Authorization: Bearer `。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
 
 
     计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
@@ -88,6 +88,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2PaperRagPassKeyword
+      x-operation-id-source: derived
   /openapi/v2/paper/rag/pass/patent:
     post:
       tags:
@@ -131,6 +133,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2PaperRagPassPatent
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResponse:

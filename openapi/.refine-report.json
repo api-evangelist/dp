@@ -1,42 +1,48 @@
 {
   "provider": "dp",
   "sources": [
-    "dp-ai-bohrium-mentor-api-openapi.yml",
-    "dp-bohrium-dataset-api-openapi.yml",
-    "dp-bohrium-file-api-openapi.yml",
-    "dp-bohrium-image-api-openapi.yml",
-    "dp-bohrium-job-api-openapi.yml",
-    "dp-bohrium-knowledge-base-api-openapi.yml",
-    "dp-bohrium-lkm-api-openapi.yml",
-    "dp-bohrium-node-api-openapi.yml",
-    "dp-bohrium-paper-search-api-openapi.yml",
-    "dp-bohrium-project-api-openapi.yml",
-    "dp-bohrium-scholar-search-api-openapi.yml",
-    "dp-bohrium-sciencepedia-api-openapi.yml",
-    "dp-bohrium-tools-api-openapi.yml",
-    "dp-bohrium-web-search-api-openapi.yml",
-    "dp-pdf-bohrium-pdf-parser-api-openapi.yml"
+    "_original/dp-bohrium-openapi.json"
   ],
   "outputs": [
     "dp-ai-bohrium-mentor-api-openapi.yml",
+    "dp-pdf-bohrium-pdf-parser-api-openapi.yml",
+    "dp-bohrium-lkm-api-openapi.yml",
+    "dp-bohrium-scholar-search-api-openapi.yml",
+    "dp-bohrium-image-api-openapi.yml",
+    "dp-bohrium-node-api-openapi.yml",
     "dp-bohrium-dataset-api-openapi.yml",
     "dp-bohrium-file-api-openapi.yml",
-    "dp-bohrium-image-api-openapi.yml",
-    "dp-bohrium-job-api-openapi.yml",
     "dp-bohrium-knowledge-base-api-openapi.yml",
-    "dp-bohrium-lkm-api-openapi.yml",
-    "dp-bohrium-node-api-openapi.yml",
-    "dp-bohrium-paper-search-api-openapi.yml",
-    "dp-bohrium-project-api-openapi.yml",
-    "dp-bohrium-scholar-search-api-openapi.yml",
-    "dp-bohrium-sciencepedia-api-openapi.yml",
     "dp-bohrium-tools-api-openapi.yml",
+    "dp-bohrium-sciencepedia-api-openapi.yml",
     "dp-bohrium-web-search-api-openapi.yml",
-    "dp-pdf-bohrium-pdf-parser-api-openapi.yml"
+    "dp-bohrium-job-api-openapi.yml",
+    "dp-bohrium-paper-search-api-openapi.yml",
+    "dp-bohrium-project-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "dp-bohrium-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "dp-ai-bohrium-mentor-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-dataset-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-file-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-image-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-job-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-knowledge-base-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-lkm-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-node-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-paper-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-project-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-scholar-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-sciencepedia-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-tools-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-bohrium-web-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dp-pdf-bohrium-pdf-parser-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

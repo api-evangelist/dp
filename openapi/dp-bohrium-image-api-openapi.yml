@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 容器镜像 (bohrium-image) API
+  title: Bohrium Open 容器镜像 (bohrium-image) API
   description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
 
 
-    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh//SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
 
 
-    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+    鉴权：所有接口使用 `Authorization: Bearer `。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
 
 
     计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
@@ -52,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ImagePublicVersionSearch
+      x-operation-id-source: derived
   /openapi/v2/image/public:
     get:
       tags:
@@ -75,6 +77,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ImagePublic
+      x-operation-id-source: derived
   /openapi/v2/image/public/{image_id}/version:
     get:
       tags:
@@ -103,6 +107,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ImagePublicByImageIdVersion
+      x-operation-id-source: derived
   /openapi/v2/image/private:
     post:
       tags:
@@ -131,6 +137,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ImagePrivate
+      x-operation-id-source: derived
     get:
       tags:
       - 容器镜像 (bohrium-image)
@@ -163,6 +171,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ImagePrivate
+      x-operation-id-source: derived
   /openapi/v2/image/private/{image_id}:
     get:
       tags:
@@ -181,6 +191,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ImagePrivateByImageId
+      x-operation-id-source: derived
     put:
       tags:
       - 容器镜像 (bohrium-image)
@@ -206,6 +218,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: putOpenapiV2ImagePrivateByImageId
+      x-operation-id-source: derived
   /openapi/v2/image/dockerfile/check:
     post:
       tags:
@@ -226,6 +240,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ImageDockerfileCheck
+      x-operation-id-source: derived
   /openapi/v2/image/last_used:
     get:
       tags:
@@ -244,6 +260,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ImageLastUsed
+      x-operation-id-source: derived
   /openapi/v2/image/{image_id}/share:
     post:
       tags:
@@ -262,6 +280,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ImageByImageIdShare
+      x-operation-id-source: derived
     delete:
       tags:
       - 容器镜像 (bohrium-image)
@@ -284,6 +304,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: deleteOpenapiV2ImageByImageIdShare
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResponse:

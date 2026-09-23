@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Bohrium Open AI 科学小导师 (bohrium-mentor) AI 科学小导师 (bohrium-mentor) 项目管理 (bohrium-project) API
+  title: Bohrium Open 项目管理 (bohrium-project) API
   description: 'Bohrium 平台对外 OpenAPI 的单一事实源（single source of truth）。
 
 
-    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh/<skill>/SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
+    本文档由仓库 `dptech-corp/bohrium-skills` 的 `docs/api/openapi.json` 维护，内容基于各 Skill（`zh//SKILL.md`）中记录的真实接口生成；Apifox 定时从本仓库抓取并同步到 https://open.bohrium.com 。
 
 
-    鉴权：所有接口使用 `Authorization: Bearer <BOHR_ACCESS_KEY>`。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
+    鉴权：所有接口使用 `Authorization: Bearer `。业务返回通常为 `{code, data, message}` 信封，`code==0` 成功，`code==2000` 未授权。
 
 
     计费端点在 operation 上以 `x-bohrium-price` 扩展标注机器可读价格，并在 description 末尾追加人类可读的「计费」行。
@@ -36,6 +36,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ProjectList
+      x-operation-id-source: derived
   /openapi/v2/project/lite_list:
     get:
       tags:
@@ -48,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ProjectLiteList
+      x-operation-id-source: derived
   /openapi/v2/project/set_name:
     post:
       tags:
@@ -70,6 +74,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ProjectSetName
+      x-operation-id-source: derived
   /openapi/v2/project/set_cost_limit:
     post:
       tags:
@@ -92,6 +98,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ProjectSetCostLimit
+      x-operation-id-source: derived
   /openapi/v2/project/{id}/users:
     get:
       tags:
@@ -110,6 +118,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: getOpenapiV2ProjectByIdUsers
+      x-operation-id-source: derived
   /openapi/v2/project/add_user:
     post:
       tags:
@@ -132,6 +142,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ProjectAddUser
+      x-operation-id-source: derived
   /openapi/v2/project/del_user:
     post:
       tags:
@@ -154,6 +166,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ProjectDelUser
+      x-operation-id-source: derived
   /openapi/v2/project/manager/add:
     post:
       tags:
@@ -176,6 +190,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ProjectManagerAdd
+      x-operation-id-source: derived
   /openapi/v2/project/manager/del:
     post:
       tags:
@@ -198,6 +214,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: postOpenapiV2ProjectManagerDel
+      x-operation-id-source: derived
   /openapi/v2/project/{id}/recovery_user:
     put:
       tags:
@@ -224,6 +242,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      operationId: putOpenapiV2ProjectByIdRecoveryUser
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResponse:
