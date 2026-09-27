@@ -55,7 +55,7 @@ tags:
 - Drug Discovery
 - Materials Science
 - Research Cloud
-- Machine-Learning
+- Machine Learning
 - HPC
 tags_raw:
 - Company
@@ -67,6 +67,7 @@ tags_raw:
 - Research Cloud
 - Machine Learning
 - HPC
+- Machine-Learning
 apis:
 - aid: dp:dp-ai-bohrium-mentor-api
   name: DP Technology (Bohrium) AI 科学小导师 (bohrium-mentor) API
