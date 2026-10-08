@@ -87,3 +87,101 @@ plans:
   period: none
   included_quota: Dataset, image, project, knowledge base, scholar/web search, file, machine, job group,
     tools commands
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - compute
+  - object
+  - request
+  plans:
+  - name: Compute jobs (bohr job)
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Development nodes (bohr node)
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Sandboxes (bohr sandbox)
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: AI mentor
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - object
+    periods:
+    - other
+  - name: Paper and patent search
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: PDF parsing
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - object
+    periods:
+    - other
+  - name: LKM PDF knowledge extraction
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: SciMaster paper agents
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: SciencePedia (bohr wiki)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Literature Knowledge Mining queries
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Bohrium CLI
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
